@@ -13,5 +13,9 @@ struct GuestListApp: App {
         WindowGroup {
             ContentView()
         }
+        
     }
+    
 }
+
+
