@@ -9,18 +9,11 @@ import SwiftUI
 
 struct ButtonView: View {
     var body: some View {
-        
-
-      //  Button {
-            //""
-      //  } label: {
 
                Ellipse()
                   .frame(width: 150, height: 40)
-
-       // }
-
-        
+                  .opacity(0.9)
+                  .shadow(radius: 5)
         
     }
 }

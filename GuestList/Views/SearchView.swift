@@ -8,24 +8,41 @@
 import SwiftUI
 
 struct SearchView: View {
-   // @State var data: Data
-   var name = ["Holly", "Josh", "Rhonda", "Ted Baker"]
+    @ObservedObject var data: Data
+    
     @State var searchText = ""
     
-
+    
     var body: some View {
-
-                NavigationStack {
-                    Text("")
-                        .navigationTitle("Search")
-                }
-                .searchable(text: $searchText)
-            }
-                           
+        
+        NavigationStack {
+            List {
+                ForEach(searchResults, id: \.self) { name in
+                    NavigationLink {
+                        ShowGuest(searchView: SearchView(data: Data()))
+                    } label: {
+                        Text(name)
                     }
-
-struct SearchVi_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchView()
+                }
+            }
+            .navigationTitle("Guest List")
+        }
+        .searchable(text: $searchText)
+    }
+    var searchResults: [String] {
+        if searchText.isEmpty {
+            return data.person
+            
+        } else {
+            return data.person.filter { $0.contains(searchText) }
+        }
+    }
+    
+    
+    
+    struct SearchVi_Previews: PreviewProvider {
+        static var previews: some View {
+            SearchView(data: Data())
+        }
     }
 }

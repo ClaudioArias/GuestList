@@ -6,14 +6,13 @@
 //
 
 import Foundation
+import SwiftUI
 
-class Data: ObservableObject {
+class Data: ObservableObject, Identifiable {
     
-    var person1 = "Tito Arias"
-    var person2 = "Claudio Arias"
-    var person3 = "August Arias"
-    var person4 = "Arias Arias"
+  @Published var person = ["Tito Arias", "Claudio Arias", "August Arias", "Arias Arias", "Claudio August"]
     
+    var date = "6 Apr 2023"
 }
     
  

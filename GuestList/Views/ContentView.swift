@@ -8,18 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @EnvironmentObject var changeViews: ChangeViews
+    
     var body: some View {
         VStack {
             
             Spacer()
             TabView {
                 //Text("Search")
-                SearchView()
+                SearchView(data: Data())
                     .tabItem {
                         Image(systemName: "magnifyingglass")
                             .foregroundColor(.red)
                     }
-                
 
                 ListView(data: Data())
                     .tabItem {
@@ -27,29 +29,18 @@ struct ContentView: View {
                             .navigationTitle("List")
                     }
                     
-                AddView()
+                AddView(data: Data())
                     .tabItem {
+                        
                         Image(systemName: "person.fill.badge.plus")
-                            
-                        
-                           
-                        
-                        // Adding here the toggle of Settings? Toggle is false prompt to Login and "systemname" is red
-
                       }
                     
-                
                 NewPass(handler: { _,_  in })
                     .tabItem {
                         Image(systemName: "gearshape.2")
                     }
-                
-                
             }
-            
-            
-            
-            
+            .environmentObject(ChangeViews())
         }
         
     }
@@ -58,5 +49,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(ChangeViews())
     }
 }

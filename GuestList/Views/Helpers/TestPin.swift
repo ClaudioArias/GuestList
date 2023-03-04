@@ -9,6 +9,7 @@ import SwiftUI
 import PasscodeField
 
 struct TestPin: View {
+    @State var digits: Int = 4
 @State var loginSettings = false
 @State var candidatePasscodes = ""
 @State var isPresentingPasscode = true
@@ -35,12 +36,12 @@ struct TestPin: View {
                     .font(.title)
                     .foregroundColor(Color(.label))
                 
-                // Text("4 digits")
-                //.font(.footnote)
-                //.foregroundColor(Color(.secondaryLabel))
+                 Text("4 digits")
+                .font(.footnote)
+                .foregroundColor(Color(.secondaryLabel))
             }
         }
-        .alert(Text("wrong password"), isPresented: $isPresentingPasscode) {
+       // .alert(Text("wrong password"), isPresented: $isPresentingPasscode) {
         }
             
             
@@ -49,7 +50,7 @@ struct TestPin: View {
         }
         
           
-        }
+        
        // .alert(
             //"Wrong Passcode",
           //  isPresented: $isShowingAlert,

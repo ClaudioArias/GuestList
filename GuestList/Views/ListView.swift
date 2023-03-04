@@ -8,31 +8,28 @@
 import SwiftUI
 
 struct ListView: View {
+    
     @ObservedObject var data: Data
+    
     var body: some View {
     
         NavigationView {
+        
             List {
             
-                HStack {
+                ForEach (data.person, id: \.self) { person in
+                    HStack {
+                        Image("ok_red")
+                        Text(person)
+                       
+                    }
+                
+                }
 
-                    Image("ok_red")
-                    Text(data.person1)
-                }
-                HStack {
-                    Image("ok_red")
-                    Text(data.person2)
-                }
-                HStack {
-                    Image("ok_red")
-                    Text(data.person3)
-                }
-                HStack {
-                    Image("ok_red")
-                    Text(data.person4)
-                }
+              
             }
-            .navigationBarTitle("List: 20 Feb 2023")
+            
+            .navigationBarTitle("List: \(data.date)")
             
         }
         

@@ -15,6 +15,8 @@
 		6B4D4B9F29909A2300ADF9AB /* GuestListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4D4B9E29909A2300ADF9AB /* GuestListUITests.swift */; };
 		6B4D4BA129909A2300ADF9AB /* GuestListUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4D4BA029909A2300ADF9AB /* GuestListUITestsLaunchTests.swift */; };
 		6B80B67A29A186F70093DF76 /* SettingsConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B80B67929A186F70093DF76 /* SettingsConfig.swift */; };
+		6B85785429B01C28008B3A5F /* ShowGuest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B85785329B01C28008B3A5F /* ShowGuest.swift */; };
+		6B85785629B15F0A008B3A5F /* PopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B85785529B15F0A008B3A5F /* PopView.swift */; };
 		6B8644B6299D77C900E3E7FE /* PinCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8644B5299D77C900E3E7FE /* PinCodeView.swift */; };
 		6B8644BA299DAD9000E3E7FE /* NewPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8644B9299DAD9000E3E7FE /* NewPass.swift */; };
 		6B8644BD299DB1F500E3E7FE /* PasscodeField in Frameworks */ = {isa = PBXBuildFile; productRef = 6B8644BC299DB1F500E3E7FE /* PasscodeField */; };
@@ -25,7 +27,7 @@
 		6B99B4482995EDFC001B9D70 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B99B4472995EDFC001B9D70 /* ListView.swift */; };
 		6B99B44A2996D5F6001B9D70 /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B99B4492996D5F6001B9D70 /* AddView.swift */; };
 		6B99B44C299817CA001B9D70 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B99B44B299817CA001B9D70 /* ButtonView.swift */; };
-		6B99B44F299823E3001B9D70 /* TestButt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B99B44E299823E3001B9D70 /* TestButt.swift */; };
+		6BA8AA2929A6C37C006B3523 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA8AA2829A6C37C006B3523 /* MainView.swift */; };
 		6BBF58E12992131800B4EB53 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBF58E02992131800B4EB53 /* SearchView.swift */; };
 		6BD15F502990A53300ED1C8C /* Guest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD15F4F2990A53300ED1C8C /* Guest.swift */; };
 		6BFDC334299C298A00152E25 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFDC333299C298A00152E25 /* SettingView.swift */; };
@@ -60,6 +62,8 @@
 		6B4D4B9E29909A2300ADF9AB /* GuestListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestListUITests.swift; sourceTree = "<group>"; };
 		6B4D4BA029909A2300ADF9AB /* GuestListUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestListUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		6B80B67929A186F70093DF76 /* SettingsConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsConfig.swift; sourceTree = "<group>"; };
+		6B85785329B01C28008B3A5F /* ShowGuest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowGuest.swift; sourceTree = "<group>"; };
+		6B85785529B15F0A008B3A5F /* PopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopView.swift; sourceTree = "<group>"; };
 		6B8644B5299D77C900E3E7FE /* PinCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinCodeView.swift; sourceTree = "<group>"; };
 		6B8644B9299DAD9000E3E7FE /* NewPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPass.swift; sourceTree = "<group>"; };
 		6B8644C2299DEF4300E3E7FE /* PinDots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinDots.swift; sourceTree = "<group>"; };
@@ -69,7 +73,7 @@
 		6B99B4472995EDFC001B9D70 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		6B99B4492996D5F6001B9D70 /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		6B99B44B299817CA001B9D70 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
-		6B99B44E299823E3001B9D70 /* TestButt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestButt.swift; sourceTree = "<group>"; };
+		6BA8AA2829A6C37C006B3523 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		6BBF58E02992131800B4EB53 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		6BD15F4F2990A53300ED1C8C /* Guest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Guest.swift; sourceTree = "<group>"; };
 		6BFDC333299C298A00152E25 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
@@ -195,12 +199,14 @@
 			isa = PBXGroup;
 			children = (
 				6B99B44B299817CA001B9D70 /* ButtonView.swift */,
-				6B99B44E299823E3001B9D70 /* TestButt.swift */,
 				6B8644B5299D77C900E3E7FE /* PinCodeView.swift */,
 				6B8644B9299DAD9000E3E7FE /* NewPass.swift */,
 				6B8644C2299DEF4300E3E7FE /* PinDots.swift */,
 				6B8644C4299EAA7A00E3E7FE /* TestPin.swift */,
 				6B8644C6299EB40000E3E7FE /* dismissAction.swift */,
+				6BA8AA2829A6C37C006B3523 /* MainView.swift */,
+				6B85785329B01C28008B3A5F /* ShowGuest.swift */,
+				6B85785529B15F0A008B3A5F /* PopView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -346,14 +352,16 @@
 				6B8644B6299D77C900E3E7FE /* PinCodeView.swift in Sources */,
 				6B99B44A2996D5F6001B9D70 /* AddView.swift in Sources */,
 				6B4D4B8629909A1C00ADF9AB /* ContentView.swift in Sources */,
+				6B85785429B01C28008B3A5F /* ShowGuest.swift in Sources */,
 				6B8644BA299DAD9000E3E7FE /* NewPass.swift in Sources */,
 				6B80B67A29A186F70093DF76 /* SettingsConfig.swift in Sources */,
 				6B99B4462995D502001B9D70 /* Data.swift in Sources */,
 				6B8644C7299EB40000E3E7FE /* dismissAction.swift in Sources */,
 				6B99B4482995EDFC001B9D70 /* ListView.swift in Sources */,
+				6B85785629B15F0A008B3A5F /* PopView.swift in Sources */,
 				6B4D4B8429909A1C00ADF9AB /* GuestListApp.swift in Sources */,
+				6BA8AA2929A6C37C006B3523 /* MainView.swift in Sources */,
 				6BBF58E12992131800B4EB53 /* SearchView.swift in Sources */,
-				6B99B44F299823E3001B9D70 /* TestButt.swift in Sources */,
 				6BD15F502990A53300ED1C8C /* Guest.swift in Sources */,
 				6B8644C3299DEF4300E3E7FE /* PinDots.swift in Sources */,
 				6B8644C5299EAA7A00E3E7FE /* TestPin.swift in Sources */,

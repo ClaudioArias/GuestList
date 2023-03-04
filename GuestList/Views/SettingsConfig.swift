@@ -7,35 +7,42 @@
 
 import SwiftUI
 
+class ChangeViews: ObservableObject {
+    @Published var showAdd = false
+}
+
+
 struct SettingsConfig: View {
 
-    @State var showAdd = false
-    var body: some View {
-        VStack {
-            
-            Toggle("Add Guest", isOn: $showAdd)
-                .font(.title)
-        
-            if showAdd == true {
+    @EnvironmentObject var changeViews: ChangeViews
 
-                Image(systemName: "person.fill.badge.plus")
-                    .foregroundColor(.green)
+    var body: some View {
+        NavigationView {
+            VStack {
+                
+                Toggle("Add Guest", isOn: $changeViews.showAdd)
+                
+                Spacer()
+                
+                NavigationLink(destination: SettingView(), label: {      ZStack {
+                    ButtonView()
+                        .foregroundColor(.red)
+                    Text("Log Out")
+                        .foregroundColor(.white)
+                        .font(.title3)
+                }})
+
             }
-            else {
-                Image(systemName: "person.fill.badge.plus")
-                    .foregroundColor(.red)
-            }
-            
-            
-            
+            .padding(30)
         }
-        .padding(30)
+        .navigationBarBackButtonHidden(true)
     }
     
     struct SettingsConfig_Previews: PreviewProvider {
         static var previews: some View {
             SettingsConfig()
+                .environmentObject(ChangeViews())
         }
     }
-        
+
 }

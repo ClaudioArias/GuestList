@@ -25,40 +25,59 @@ public struct NewPass: View {
     
     public var body: some View {
         
-        
-        VStack(spacing: 10) {
-            
-            Text(label).font(.title)
-            ZStack {
-                pinDots
-                backgroundField
-            }
-            showPinStack
-            
-            // Button to go to next view after correct pin
-            Button {
-                if (pin == "1234"){
-                    loginSettings.toggle()
-                }
-
-                
-            } label: {
+        NavigationView {
+            VStack(spacing: 50) {
+                Text(label).font(.title)
                 ZStack {
-                    ButtonView()
-                        .foregroundColor(.blue)
-                    Text("Login")
-                        .foregroundColor(.white)
-                        .font(.title3)
+                    pinDots
+                    backgroundField
                 }
-            }
-            .sheet(isPresented: $loginSettings) {
-                SettingsConfig()
+                showPinStack
+                
+                // Button to go to next view after correct pin
+                Button {
+                    if (pin == "1234"){
+                        loginSettings.toggle()
+                    }
+                    
+                    
+                } label: {
+                    
+                    NavigationLink(destination: SettingsConfig(), isActive: $loginSettings, label: {Text("")})
+                    
+                    
+                    ZStack {
+                        
+                        if (isDisabled == true) {
+                            
+                            ButtonView()
+                                .foregroundColor(.blue)
+                         Text("Login")
+                                .foregroundColor(.white)
+                                .font(.title3)
+                        
+                        }
+                        else {
+                            
+                            //ButtonView()
+                              //  .foregroundColor(.gray)
+                            //Text("Login")
+                              //  .foregroundColor(.white)
+                              //  .font(.title3)
+                        }
+                        
+                        
+                    }
+                }
+                //.sheet(isPresented: $loginSettings) {
+                //  SettingsConfig()
                 // TODO need to resolve sheet into other view
+                // }
+                
+                
             }
-
-            
         }
-        
+        .navigationBarBackButtonHidden(true)
     }
     
     private var pinDots: some View {
@@ -117,7 +136,6 @@ public struct NewPass: View {
                 Image(systemName: "eye.fill").foregroundColor(.green)
     
         })
-        // Add Button to advance next View
 
         
        
