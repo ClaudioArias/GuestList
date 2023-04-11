@@ -11,8 +11,7 @@ struct guest: Identifiable {
     
     var id: UUID
     var name: String
-  //  var lastName: String
-    var gender: String
+   // var gender: String
     var date: Int
     
 }

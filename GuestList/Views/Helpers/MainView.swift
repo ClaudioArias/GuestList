@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     @State private var showView = "LoginView"
-    @State var password = true
+    @State var password = false
     var body: some View {
         
         //Toggle("Hit me", isOn: $password)

@@ -11,44 +11,53 @@ struct ContentView: View {
     
     @EnvironmentObject var changeViews: ChangeViews
     
+    
     var body: some View {
         VStack {
             
             Spacer()
             TabView {
                 //Text("Search")
-                SearchView(data: Data())
+                SearchView()
                     .tabItem {
                         Image(systemName: "magnifyingglass")
                             .foregroundColor(.red)
                     }
-
-                ListView(data: Data())
+                //.tag(0)
+                
+                ListView()
                     .tabItem {
                         Image(systemName: "list.bullet")
-                            .navigationTitle("List")
+                        // .navigationTitle("List")
                     }
-                    
-                AddView(data: Data())
+                // .tag(1)
+                
+                AddView()
                     .tabItem {
-                        
                         Image(systemName: "person.fill.badge.plus")
-                      }
-                    
+                    }
+                //.tag(2)
+                
                 NewPass(handler: { _,_  in })
                     .tabItem {
                         Image(systemName: "gearshape.2")
                     }
+                // .tag(3)
             }
             .environmentObject(ChangeViews())
+            .environmentObject(Data())
+            .environmentObject(EnterName())
         }
         
     }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-            .environmentObject(ChangeViews())
+    
+    
+    struct ContentView_Previews: PreviewProvider {
+        static var previews: some View {
+            ContentView()
+                .environmentObject(ChangeViews())
+                .environmentObject(Data())
+                .environmentObject(EnterName())
+        }
     }
 }

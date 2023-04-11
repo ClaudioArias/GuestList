@@ -59,11 +59,11 @@ public struct NewPass: View {
                         }
                         else {
                             
-                            //ButtonView()
-                              //  .foregroundColor(.gray)
+                           // ButtonView()
+                             //   .foregroundColor(.gray)
                             //Text("Login")
                               //  .foregroundColor(.white)
-                              //  .font(.title3)
+                                //.font(.title3)
                         }
                         
                         

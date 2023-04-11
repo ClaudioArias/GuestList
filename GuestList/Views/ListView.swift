@@ -9,37 +9,64 @@ import SwiftUI
 
 struct ListView: View {
     
-    @ObservedObject var data: Data
+    @EnvironmentObject var changeViews: ChangeViews
+    @EnvironmentObject var data: Data
+    @EnvironmentObject var enterName: EnterName
     
     var body: some View {
-    
-        NavigationView {
         
-            List {
+        NavigationView {
             
-                ForEach (data.person, id: \.self) { person in
-                    HStack {
-                        Image("ok_red")
-                        Text(person)
-                       
-                    }
+            List {
                 
+                if (changeViews.showAdd == true) {
+                    
+                    ForEach (data.personChecked, id: \.self) { person in
+                        HStack {
+                            
+                            Image("ok_gre")
+                            Text(person)
+                            
+                            
+                        }
+                        
+                    }
+                    .onDelete { indexSet in
+                        data.personChecked.remove(atOffsets: indexSet)
+                        
+                    }
+                    
                 }
-
-              
+                else {
+                    
+                    ForEach (data.personChecked, id: \.count) { person in
+                        HStack {
+                            
+                            Image("ok_gre")
+                            Text(person)
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+                
             }
             
-            .navigationBarTitle("List: \(data.date)")
+            .navigationBarTitle("List: \(changeViews.dateSelection)")
             
         }
         
-        
-    
     }
     
     
     struct ListView_Previews: PreviewProvider {
         static var previews: some View {
-            ListView(data: Data())    }
+            ListView()
+                .environmentObject(Data())
+                .environmentObject(EnterName())
+                .environmentObject(ChangeViews())
+        }
     }
 }

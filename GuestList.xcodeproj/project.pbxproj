@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B277F6D29DD9769002FBF8F /* ShowList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B277F6C29DD9769002FBF8F /* ShowList.swift */; };
 		6B4D4B8429909A1C00ADF9AB /* GuestListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4D4B8329909A1C00ADF9AB /* GuestListApp.swift */; };
 		6B4D4B8629909A1C00ADF9AB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4D4B8529909A1C00ADF9AB /* ContentView.swift */; };
 		6B4D4B8829909A2300ADF9AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B4D4B8729909A2300ADF9AB /* Assets.xcassets */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6B277F6C29DD9769002FBF8F /* ShowList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowList.swift; sourceTree = "<group>"; };
 		6B4D4B8029909A1C00ADF9AB /* GuestList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuestList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B4D4B8329909A1C00ADF9AB /* GuestListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestListApp.swift; sourceTree = "<group>"; };
 		6B4D4B8529909A1C00ADF9AB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				6BA8AA2829A6C37C006B3523 /* MainView.swift */,
 				6B85785329B01C28008B3A5F /* ShowGuest.swift */,
 				6B85785529B15F0A008B3A5F /* PopView.swift */,
+				6B277F6C29DD9769002FBF8F /* ShowList.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 				6B99B4462995D502001B9D70 /* Data.swift in Sources */,
 				6B8644C7299EB40000E3E7FE /* dismissAction.swift in Sources */,
 				6B99B4482995EDFC001B9D70 /* ListView.swift in Sources */,
+				6B277F6D29DD9769002FBF8F /* ShowList.swift in Sources */,
 				6B85785629B15F0A008B3A5F /* PopView.swift in Sources */,
 				6B4D4B8429909A1C00ADF9AB /* GuestListApp.swift in Sources */,
 				6BA8AA2929A6C37C006B3523 /* MainView.swift in Sources */,

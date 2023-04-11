@@ -37,7 +37,7 @@ struct PinCodeView: View {
                     
                 }
                 .sheet(isPresented: $loginSettings) {
-                    SearchView(data: Data())
+                    SearchView()
                 }
               //  Spacer()
             }

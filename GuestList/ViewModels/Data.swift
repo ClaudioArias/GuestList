@@ -10,11 +10,24 @@ import SwiftUI
 
 class Data: ObservableObject, Identifiable {
     
-  @Published var person = ["Tito Arias", "Claudio Arias", "August Arias", "Arias Arias", "Claudio August"]
+     @Published var id = UUID()
     
-    var date = "6 Apr 2023"
+    @Published var person = ["Tito Arias",
+                             "Claudio Arias",
+                             "August Arias",
+                             "Arias Arias",
+                             "Claudio August"
+    ]
+    @Published var personChecked = ["Happy Men"]
+    
+    @Published var date: [String] = ["6 Apr 2023",
+                                     "7 Apr 2023",
+                                     "9 Apr 2023"
+    ]
+    
+    
 }
-    
- 
+
+
 
 

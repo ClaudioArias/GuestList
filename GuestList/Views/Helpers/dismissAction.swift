@@ -8,8 +8,31 @@
 import SwiftUI
 
 struct dismissAction: View {
+    @ObservedObject var data: Data
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        NavigationStack {
+            
+            NavigationLink {
+                ShowGuest()            } label: {
+                    List {
+                        ForEach (data.person, id: \.self) { person in
+              
+                            HStack {
+                                Text(person)
+                                
+                            }
+                            
+                        }
+                        
+                    }
+            }
+
+            
+        }
+           
+            
+ 
         
         
     }
@@ -17,6 +40,7 @@ struct dismissAction: View {
 
 struct dismissAction_Previews: PreviewProvider {
     static var previews: some View {
-        dismissAction()
+        dismissAction(data: Data())
+            .environmentObject(Data())
     }
 }
