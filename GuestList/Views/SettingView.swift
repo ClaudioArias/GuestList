@@ -11,8 +11,7 @@ struct SettingView: View {
     var body: some View {
         
         NewPass(handler: { _,_  in })
-            
-        
+
     }
 }
 

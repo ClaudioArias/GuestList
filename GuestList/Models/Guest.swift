@@ -7,11 +7,10 @@
 
 import Foundation
 
-struct guest: Identifiable {
+struct Guest: Hashable {
     
-    var id: UUID
+    var id = UUID()
     var name: String
-   // var gender: String
-    var date: Int
-    
+    var checkInDate: String
+
 }

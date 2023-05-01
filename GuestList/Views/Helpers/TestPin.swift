@@ -10,12 +10,12 @@ import PasscodeField
 
 struct TestPin: View {
     @State var digits: Int = 4
-@State var loginSettings = false
-@State var candidatePasscodes = ""
-@State var isPresentingPasscode = true
-@State var isShowingAlert = false
-@State var confirmationText = ""
-@State var cancellationAction = ""
+    @State var loginSettings = false
+    @State var candidatePasscodes = ""
+    @State var isPresentingPasscode = true
+    @State var isShowingAlert = false
+    @State var confirmationText = ""
+    @State var cancellationAction = ""
     
     var body: some View {
         PasscodeField { digits, action in
@@ -36,40 +36,41 @@ struct TestPin: View {
                     .font(.title)
                     .foregroundColor(Color(.label))
                 
-                 Text("4 digits")
-                .font(.footnote)
-                .foregroundColor(Color(.secondaryLabel))
+                Text("4 digits")
+                    .font(.footnote)
+                    .foregroundColor(Color(.secondaryLabel))
             }
         }
-       // .alert(Text("wrong password"), isPresented: $isPresentingPasscode) {
-        }
-            
-            
+        .alert(Text("wrong password"), isPresented: $isPresentingPasscode) {
         
-            
-        }
-        
-          
-        
-       // .alert(
-            //"Wrong Passcode",
-          //  isPresented: $isShowingAlert,
-            //confirmationText: "Retry",
-            //confirmationAction: {
-              //  isShowingAlert = false
-           // },
-           // cancellationText: "Quit",
-           // cancellationAction: {
-               // isShowingAlert = false
-               // dismissAction()
-           // }
-        
-        //)
     
-    
-    struct TestPin_Previews: PreviewProvider {
-        static var previews: some View {
-            TestPin()
         }
+        
+        
+        
+        
     }
-    
+      //  .alert(Text("wrong password"),
+        //isPresented: $isShowingAlert) {
+        //confirmationText: "Retry",
+        //confirmationAction: {
+          //  isShowingAlert = false
+        //},
+        //cancellationText: "Quit",
+        //cancellationAction: {
+          //  isShowingAlert = false
+            //dismissAction()
+        //}
+            
+          //  )
+            
+            
+            struct TestPin_Previews: PreviewProvider {
+                static var previews: some View {
+                    TestPin()
+                }
+            }
+            
+            
+        }
+

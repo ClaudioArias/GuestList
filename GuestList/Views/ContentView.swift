@@ -21,7 +21,7 @@ struct ContentView: View {
                 SearchView()
                     .tabItem {
                         Image(systemName: "magnifyingglass")
-                            .foregroundColor(.red)
+                            .shadow(radius: 5)
                     }
                 //.tag(0)
                 
@@ -35,6 +35,7 @@ struct ContentView: View {
                 AddView()
                     .tabItem {
                         Image(systemName: "person.fill.badge.plus")
+                            .foregroundColor(.white)
                     }
                 //.tag(2)
                 
@@ -45,7 +46,7 @@ struct ContentView: View {
                 // .tag(3)
             }
             .environmentObject(ChangeViews())
-            .environmentObject(Data())
+            .environmentObject(ListOfPeople())
             .environmentObject(EnterName())
         }
         
@@ -56,7 +57,7 @@ struct ContentView: View {
         static var previews: some View {
             ContentView()
                 .environmentObject(ChangeViews())
-                .environmentObject(Data())
+                .environmentObject(ListOfPeople())
                 .environmentObject(EnterName())
         }
     }

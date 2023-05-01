@@ -14,7 +14,7 @@ struct PopView: View {
             ZStack{
                 
                 Rectangle()
-                     .foregroundColor(.white)
+                     //.foregroundColor(.white)
                      .frame(width: 350, height: 300)
                      .cornerRadius(20)
                      .shadow(radius: 10)

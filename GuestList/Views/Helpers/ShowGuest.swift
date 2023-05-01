@@ -10,7 +10,7 @@ import SwiftUI
 struct ShowGuest: View {
    // var searchView: SearchView
     
-   @EnvironmentObject var data: Data
+   @EnvironmentObject var listOfPeople: ListOfPeople
    @EnvironmentObject var enterName: EnterName
    @State private var showingPopup = false
     

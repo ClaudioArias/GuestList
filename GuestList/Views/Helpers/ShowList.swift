@@ -9,26 +9,29 @@ import SwiftUI
 
 struct ShowList: View {
     
-    @EnvironmentObject var data: Data
+    @EnvironmentObject var listOfPeople: ListOfPeople
     @EnvironmentObject var enterName: EnterName
     
     var body: some View {
         List {
-            ForEach (data.person, id: \.count) { person in
-                Text(person)
+            ForEach (listOfPeople.people, id: \.self) { person in
+                Text(person.name)
+                    .padding(4)
                 
             }
             .onDelete { indexSet in
-                data.person.remove(atOffsets: indexSet)
+                listOfPeople.people.remove(atOffsets: indexSet)
+            
                 
             }
         }
+        .cornerRadius(20)
     }
     
     struct ShowList_Previews: PreviewProvider {
         static var previews: some View {
             ShowList()
-                .environmentObject(Data())
+                .environmentObject(ListOfPeople())
                 .environmentObject(EnterName())
         }
     }

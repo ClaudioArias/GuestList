@@ -9,8 +9,15 @@
 import SwiftUI
 // import Introspect
 
+class changePassWord: ObservableObject {
+    
+    @Published var pin: String = ""
+    
+}
+
 public struct NewPass: View {
     
+   // @EnvironmentObject var changePassword: ChangePa
     var maxDigits: Int = 4
     var label = "Enter Pin"
     
@@ -31,6 +38,7 @@ public struct NewPass: View {
                 ZStack {
                     pinDots
                     backgroundField
+
                 }
                 showPinStack
                 
@@ -45,6 +53,7 @@ public struct NewPass: View {
                     
                     NavigationLink(destination: SettingsConfig(), isActive: $loginSettings, label: {Text("")})
                     
+                   
                     
                     ZStack {
                         
@@ -58,7 +67,7 @@ public struct NewPass: View {
                         
                         }
                         else {
-                            
+
                            // ButtonView()
                              //   .foregroundColor(.gray)
                             //Text("Login")
@@ -147,7 +156,7 @@ public struct NewPass: View {
             showPin = false
             return
         }
-        //TODO: Check if next view button will work here
+       
         if pin.count == maxDigits {
             isDisabled = true
             

@@ -10,10 +10,10 @@ import SwiftUI
 struct AddView: View {
     
     @EnvironmentObject var changeViews: ChangeViews
-    @EnvironmentObject var data: Data
+    @EnvironmentObject var listOfPeople: ListOfPeople
     @State  var name = ""
     @State  var gender = ""
-    @State  var date = Date.now
+    @State  var date = ""
     
     
     var body: some View {
@@ -22,33 +22,47 @@ struct AddView: View {
             
             VStack {
                 TextField("name", text: $name)
-                TextField("gender", text: $gender)
-                //  TextField("list date", text: $date)
-                DatePicker("Select date", selection: $date)
+                    .padding(10)
+                //TextField("gender", text: $gender)
+                TextField("list date", text: $date)
+                //DatePicker("Select date", selection: $date)
                 
-                // TODO: add function to navigate
-                VStack {
-                    Button("Add Me") {
-                        data.person.append(name)
-
+                    .padding(10)
+            
+         
+                if (name.isEmpty || date.isEmpty) {
+                    ZStack {
+                        ButtonView()
+                            .foregroundColor(.gray)
+                            .blur(radius: 1)
+                        Text("Add")
+                            .foregroundColor(.white)
+                           .blur(radius: 2)
+                        
+                     
                     }
+                    .padding(20)
+                        
+                }
+                else {
+                    
+                    Button(action: {listOfPeople.people.append(Person(name: name, checkInDate: date))}, label: {
+                        ZStack {
+                            ButtonView()
+                                .foregroundColor(.blue)
+                            Text("Add")
+                                .foregroundColor(.white)
+                        
+                        }
+                    })
+                    
+                }
 
-                }
                 
-                ZStack {
-                    ButtonView()
-                        .foregroundColor(.blue)
-                    
-                    Text("Add")
-                        .foregroundColor(.white)
-                        .font(.title3)
-                    
-                    
-                }
-                .padding()
+               
                 Spacer()
                 Spacer()
-                Spacer()
+              
                 NavigationView {
                     
                     ScrollView {
@@ -73,17 +87,27 @@ struct AddView: View {
             
         }
         else {
-            ZStack {
-                PopView()
-                VStack (spacing: 10) {
+            VStack {
+               // PopView()
+               /* VStack (spacing: 10) {
                     Text("Access Denied")
                         .foregroundColor(.red)
                         .font(.title)
                         .bold()
                     Text("You need to enable 'Add Guest' in Settings")
                 }
-                .padding(10)
+              */ // .padding(10)
+                Image(systemName: "lock.trianglebadge.exclamationmark")
+                    .resizable()
+                    .foregroundColor(.red)
+                    .scaledToFit()
+                    .frame(width: 150, height: 150)
+                    .shadow(radius: 100)
                 
+                
+                Text("You need to login to have access")
+                    .font(.title2)
+                    .padding(20)
             }
             
             
@@ -103,7 +127,7 @@ struct AddView: View {
             
             AddView()
                 .environmentObject(ChangeViews())
-                .environmentObject(Data())
+                .environmentObject(ListOfPeople())
         }
     }
     

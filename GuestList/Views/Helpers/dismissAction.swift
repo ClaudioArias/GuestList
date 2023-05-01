@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct dismissAction: View {
-    @ObservedObject var data: Data
+    @ObservedObject var listOfPeople: ListOfPeople
     var body: some View {
         
         NavigationStack {
@@ -16,10 +16,10 @@ struct dismissAction: View {
             NavigationLink {
                 ShowGuest()            } label: {
                     List {
-                        ForEach (data.person, id: \.self) { person in
+                        ForEach (listOfPeople.people, id: \.self) { person in
               
                             HStack {
-                                Text(person)
+                                Text(person.name)
                                 
                             }
                             
@@ -40,7 +40,7 @@ struct dismissAction: View {
 
 struct dismissAction_Previews: PreviewProvider {
     static var previews: some View {
-        dismissAction(data: Data())
-            .environmentObject(Data())
+        dismissAction(listOfPeople:ListOfPeople())
+            .environmentObject(ListOfPeople())
     }
 }

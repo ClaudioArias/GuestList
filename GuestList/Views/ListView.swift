@@ -10,61 +10,75 @@ import SwiftUI
 struct ListView: View {
     
     @EnvironmentObject var changeViews: ChangeViews
-    @EnvironmentObject var data: Data
+    @EnvironmentObject var listOfPeople: ListOfPeople
     @EnvironmentObject var enterName: EnterName
+    @State var isEmpty = false
     
     var body: some View {
         
         NavigationView {
             
             List {
-                
+               
                 if (changeViews.showAdd == true) {
                     
-                    ForEach (data.personChecked, id: \.self) { person in
+                    ForEach (listOfPeople.personChecked, id: \.self) { person in
                         HStack {
-                            
+
                             Image("ok_gre")
-                            Text(person)
-                            
-                            
+                            Text(person.name)
                         }
                         
                     }
                     .onDelete { indexSet in
-                        data.personChecked.remove(atOffsets: indexSet)
+                        listOfPeople.personChecked.remove(atOffsets: indexSet)
                         
                     }
-                    
+                   
                 }
-                else {
+                else if (listOfPeople.personChecked.isEmpty) {
+                 
                     
-                    ForEach (data.personChecked, id: \.count) { person in
+                    ZStack {
+                        PopView()
+                            .foregroundColor(.white)
+                            .shadow(radius: 2)
+                        Text("No guest has been checked in yet")
+                            .font(.title2)
+                    }
+                    
+               
+                }
+                
+                else {
+                    ForEach (listOfPeople.personChecked, id: \.self) { person in
                         HStack {
-                            
-                            Image("ok_gre")
-                            Text(person)
-                            
+              
+    
+                                Image("ok_gre")
+                            Text(person.name)
+                                
+                          
                         }
                         
                     }
                     
                 }
-                
-                
             }
             
             .navigationBarTitle("List: \(changeViews.dateSelection)")
             
         }
+       
         
     }
+    
     
     
     struct ListView_Previews: PreviewProvider {
         static var previews: some View {
             ListView()
-                .environmentObject(Data())
+                .environmentObject(ListOfPeople())
                 .environmentObject(EnterName())
                 .environmentObject(ChangeViews())
         }
