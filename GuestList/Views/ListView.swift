@@ -28,13 +28,14 @@ struct ListView: View {
                             Image("ok_gre")
                             Text(person.name)
                         }
+
                         
                     }
                     .onDelete { indexSet in
                         listOfPeople.personChecked.remove(atOffsets: indexSet)
                         
                     }
-                   
+                    
                 }
                 else if (listOfPeople.personChecked.isEmpty) {
                  

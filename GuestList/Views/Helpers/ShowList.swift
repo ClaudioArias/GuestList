@@ -16,15 +16,22 @@ struct ShowList: View {
         List {
             ForEach (listOfPeople.people, id: \.self) { person in
                 Text(person.name)
-                    .padding(4)
-                
+                  
             }
+            
             .onDelete { indexSet in
                 listOfPeople.people.remove(atOffsets: indexSet)
-            
-                
             }
+            .listRowBackground(Rectangle().fill(Gradient(colors: [.white, .gray])))
+            .shadow(radius: 8)
+            //.padding(6)
+            .listRowSeparatorTint(.green)
+            .padding(9)
         }
+       // .background(Color.mint.edgesIgnoringSafeArea(.all))
+        .background(Gradient(colors: [.gray, .white]))
+       
+        .scrollContentBackground(.hidden)
         .cornerRadius(20)
     }
     

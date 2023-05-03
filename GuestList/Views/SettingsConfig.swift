@@ -20,7 +20,7 @@ struct SettingsConfig: View {
     
     
     var body: some View {
-        
+
         NavigationView {
             VStack {
                 Toggle("Add Guest/ Delete Guest", isOn: $changeViews.showAdd)
@@ -39,7 +39,7 @@ struct SettingsConfig: View {
                 .font(.title2)
                 .padding()
 
-                Text("Delete date lists")
+                Text("Delete Checked lists")
                     .foregroundColor(.red)
                     .font(.title)
                   //  .padding(40)
@@ -47,7 +47,7 @@ struct SettingsConfig: View {
                 
                 VStack (alignment: .center)  {
                     List {
-                        ForEach(listOfPeople.people, id: \.self) { dates in
+                        ForEach(listOfPeople.personChecked, id: \.self) { dates in
                             HStack {
                                 Text(dates.checkInDate)
                                     
@@ -59,7 +59,7 @@ struct SettingsConfig: View {
                             
                         }
                         .onDelete { indexSet in
-                            listOfPeople.people.remove(atOffsets: indexSet)
+                            listOfPeople.personChecked.remove(atOffsets: indexSet)
                             
                         }
                         
@@ -74,9 +74,9 @@ struct SettingsConfig: View {
                         ZStack {
                             ButtonView()
                                 .foregroundColor(.yellow)
-                               
+                                .grayscale(0.1)
                             Text("Change Pin")
-                                .foregroundColor(.white)
+                                .foregroundColor(.black)
                                 .font(.title3)
                         }
                     }
@@ -87,15 +87,18 @@ struct SettingsConfig: View {
                 NavigationLink(destination: SettingView(), label: {      ZStack {
                     ButtonView()
                         .foregroundColor(.red)
-                        .shadow(color: .blue, radius: 3)
+                        .grayscale(0.1)
+                      //  .shadow(color: .black, radius: 3)
                     Text("Log Out")
                         .foregroundColor(.white)
                         .font(.title3)
+                    
                         
                 }})
                 .padding(.bottom)
                 
             }
+            
             .padding(30)
             
             
@@ -103,7 +106,9 @@ struct SettingsConfig: View {
         }
         .navigationBarBackButtonHidden(true)
         
+        
     }
+    
     
     struct SettingsConfig_Previews: PreviewProvider {
         static var previews: some View {

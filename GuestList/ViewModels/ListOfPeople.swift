@@ -47,7 +47,7 @@ class ListOfPeople: ObservableObject {
     
     func sameCheckInDate(person: Person) {
         if (person.checkInDate == person.checkInDate) {
-            
+            //
         
         }
     }

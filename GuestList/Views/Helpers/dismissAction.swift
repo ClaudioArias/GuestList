@@ -10,27 +10,13 @@ import SwiftUI
 struct dismissAction: View {
     @ObservedObject var listOfPeople: ListOfPeople
     var body: some View {
-        
-        NavigationStack {
-            
-            NavigationLink {
-                ShowGuest()            } label: {
-                    List {
-                        ForEach (listOfPeople.people, id: \.self) { person in
-              
-                            HStack {
-                                Text(person.name)
-                                
-                            }
-                            
-                        }
-                        
-                    }
-            }
-
+      
+        ZStack {
+            Color.gray
+                .edgesIgnoringSafeArea(.all)
+             
             
         }
-           
             
  
         

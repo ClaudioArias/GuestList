@@ -10,9 +10,10 @@ import SwiftUI
 struct ContentView: View {
     
     @EnvironmentObject var changeViews: ChangeViews
-    
+
     
     var body: some View {
+        
         VStack {
             
             Spacer()
@@ -45,11 +46,12 @@ struct ContentView: View {
                     }
                 // .tag(3)
             }
+            .background(Color.gray)
             .environmentObject(ChangeViews())
             .environmentObject(ListOfPeople())
             .environmentObject(EnterName())
         }
-        
+       
     }
     
     
