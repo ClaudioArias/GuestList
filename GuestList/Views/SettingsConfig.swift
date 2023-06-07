@@ -12,111 +12,105 @@ class ChangeViews: ObservableObject {
     @Published var dateSelection = ""
 }
 
-
 struct SettingsConfig: View {
-    
     @EnvironmentObject var changeViews: ChangeViews
     @EnvironmentObject var listOfPeople: ListOfPeople
+    @EnvironmentObject var changePassWord: ChangePassword
+    
+
     
     
     var body: some View {
-
-        NavigationView {
+        NavigationStack {
             VStack {
-                Toggle("Add Guest/ Delete Guest", isOn: $changeViews.showAdd)
+                Toggle("Add Guest/Delete Guest", isOn: $changeViews.showAdd)
                     .font(.title2)
+                    .padding(20)
+                   // .shadow(color: .white, radius: 5)
                 
-                Picker("Select Guest List date", selection: $changeViews.dateSelection) {
-                    ForEach(listOfPeople.people, id: \.checkInDate) { person in
-                        Text(person.checkInDate)
-                            .tag(0)
+                HStack(alignment: .center) {
+                    Text("Select date:")
+                        .font(.title2)
                         
+                        
+                        
+                    Picker("Select date", selection: $changeViews.dateSelection) {
+                        ForEach(listOfPeople.dateList, id: \.self) { date in
+                            Text(date)
+                                .tag(date)
+                        }
                     }
-                
-                    
+                    .pickerStyle(MenuPickerStyle())
+                    .font(.title2)
+                    .padding()
+                  //  .shadow(color: .white, radius: 5)
                 }
-                .pickerStyle(SegmentedPickerStyle())
-                .font(.title2)
-                .padding()
-
+                
                 Text("Delete Checked lists")
-                    .foregroundColor(.red)
                     .font(.title)
-                  //  .padding(40)
+                    .foregroundColor(.black)
+                    //.shadow(color: .white, radius: 5)
+                    .padding(.top, 20)
                 
-                
-                VStack (alignment: .center)  {
+                VStack(alignment: .center) {
                     List {
-                        ForEach(listOfPeople.personChecked, id: \.self) { dates in
+                        ForEach(listOfPeople.uniqueDates, id: \.self) { date in
                             HStack {
-                                Text(dates.checkInDate)
-                                    
-                                
+                                Text(date)
                             }
                             .font(.title2)
-
-                            .padding(20)
-                            
+                            .padding(10)
                         }
                         .onDelete { indexSet in
                             listOfPeople.personChecked.remove(atOffsets: indexSet)
-                            
                         }
-                        
+                        .listRowBackground(Rectangle().fill(Gradient(colors: [.white, .green])))
                     }
+                    .cornerRadius(10)
+                    .padding(10)
+                    .shadow(color: .black, radius: 5)
                 }
-                .cornerRadius(10)
-                .padding(20)
-               
-                
-                NavigationLink(destination: {ChangePin()}, label: {
+
+                NavigationLink(destination: ChangePin(), label: {
                     VStack {
                         ZStack {
                             ButtonView()
                                 .foregroundColor(.yellow)
-                                .grayscale(0.1)
+                               // .grayscale(0.1)
+                                .shadow(color: .black, radius: 1)
                             Text("Change Pin")
                                 .foregroundColor(.black)
                                 .font(.title3)
                         }
                     }
                 })
-                    .font(.title)
-                    .padding(20)
-            
-                NavigationLink(destination: SettingView(), label: {      ZStack {
-                    ButtonView()
-                        .foregroundColor(.red)
-                        .grayscale(0.1)
-                      //  .shadow(color: .black, radius: 3)
-                    Text("Log Out")
-                        .foregroundColor(.white)
-                        .font(.title3)
-                    
-                        
-                }})
-                .padding(.bottom)
+                .font(.title)
                 
+                NavigationLink(destination: SettingView(), label: {
+                    ZStack {
+                        ButtonView()
+                            .foregroundColor(.red)
+                            .shadow(color: .black, radius: 1)
+                        Text("Log Out")
+                            .foregroundColor(.white)
+                            .font(.title3)
+                    }
+                })
+                .padding(50)
             }
-            
-            .padding(30)
-            
-            
-            
+            .scrollContentBackground(.hidden)
+            .background(LinearGradient(colors: [.blue, .green], startPoint: .top, endPoint: .bottom))
         }
         .navigationBarBackButtonHidden(true)
-        
-        
+        .toolbarBackground(.hidden)
     }
-    
-    
-    struct SettingsConfig_Previews: PreviewProvider {
-        static var previews: some View {
-            SettingsConfig()
-                .environmentObject(ChangeViews())
-                .environmentObject(ListOfPeople())
-        }
+}
+
+struct SettingsConfig_Previews: PreviewProvider {
+    static var previews: some View {
+        SettingsConfig()
+            .environmentObject(ChangeViews())
+            .environmentObject(ListOfPeople())
+            .environmentObject(ChangePassword())
     }
-    
-    
 }

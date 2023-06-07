@@ -12,111 +12,136 @@ struct AddView: View {
     @EnvironmentObject var changeViews: ChangeViews
     @EnvironmentObject var listOfPeople: ListOfPeople
     @State  var name = ""
-    @State  var gender = ""
-    @State  var date = ""
-    
+    //@State  var gender = ""
+    @State  var selectedDate = Date()
+   @State var date = Date()
+    @State var showAlert = false
     
     var body: some View {
         
-        if (changeViews.showAdd == true) {
+        
+        // This is for the Background and need to be fine tuned.
+        ZStack {
+            LinearGradient(colors: [.blue, .green], startPoint: .topLeading, endPoint: .bottomLeading)
+           
             
-            VStack {
-                TextField("name", text: $name)
-                    .padding(10)
-                //TextField("gender", text: $gender)
-                TextField("list date", text: $date)
-                //DatePicker("Select date", selection: $date)
+            if (changeViews.showAdd == false) {
                 
-                    .padding(10)
-            
-         
-                if (name.isEmpty || date.isEmpty) {
-                    ZStack {
-                        ButtonView()
-                            .foregroundColor(.gray)
-                            .blur(radius: 1)
-                        Text("Add")
-                            .foregroundColor(.white)
-                           .blur(radius: 2)
-                        
-                     
-                    }
-                    .padding(20)
-                        
-                }
-                else {
+                VStack {
+                    TextField("name", text: $name)
+                        .padding(10)
                     
-                    Button(action: {listOfPeople.people.append(Person(name: name, checkInDate: date))}, label: {
+                    DatePicker("Select Check in date", selection: $date,
+                               in: Date.now...,
+                               displayedComponents: .date)
+                    
+                        .padding(10)
+                
+             
+                    if (name.isEmpty) {
                         ZStack {
                             ButtonView()
-                                .foregroundColor(.blue)
+                                .foregroundColor(.gray)
+                                .blur(radius: 1)
                             Text("Add")
                                 .foregroundColor(.white)
-                        
-                        }
-                    })
-                    
-                }
+                               .blur(radius: 2)
 
-                
-               
-                Spacer()
-                Spacer()
-              
-                NavigationView {
-                    
-                    ScrollView {
-                        NavigationLink(destination: ShowList()) {
+                        }
+                        .padding(20)
+                            
+                    }
+                   else {
+                        
+                       Button(action: {listOfPeople.people.append(Person(name: name, checkInDate: date))
+                           
+                           showAlert = true
+                       }, label: {
                             ZStack {
                                 ButtonView()
-                                    .foregroundColor(.green)
-                                Text("Show List")
+                                    .foregroundColor(.blue)
+                                    .shadow(color: .black, radius: 1)
+                                Text("Add")
                                     .foregroundColor(.white)
-                                    .font(.title3)
+                                   // .shadow(color: .blue, radius: 1)
+
                             }
-                        }
+                            .padding(20)
+                        })
+                       .alert("\(name) added successfully", isPresented: $showAlert, actions: {
+                           Button("Ok", role: .cancel, action: {
+                               name.removeAll()
+                           })
+                       })
                     }
+                  // *** Need to change button if Showlist is empty buttton blur
+                  //  NavigationView {
+                        
+                     //   ScrollView {
+                      //      Spacer()
+                      //      NavigationLink(destination: ShowList()) {
+                           //     ZStack {
+
+                                //    ButtonView()
+                                   //     .foregroundColor(.green)
+                               //     Text("Show List")
+                                       // .foregroundColor(.white)
+                                  //      .font(.title3)
+                           //     }
+                           //     .padding(20)
+                                
+                    //        }
+                        
+                    //    }
+                        
+                        
+              //      }
                     
+                   // .padding()
+                    
+
                     
                 }
-                
+                .font(.title2)
+                .padding(10)
                 
             }
-            .font(.title2)
-            .padding(30)
-            
-        }
-        else {
-            VStack {
-               // PopView()
-               /* VStack (spacing: 10) {
-                    Text("Access Denied")
+            else {
+                VStack {
+                    // This is a customize image with gradient color.
+                   /* LinearGradient(gradient: Gradient(colors: [.white, .red, .red]), startPoint: .top, endPoint: .bottom)
+                        .mask( Image(systemName: "lock.trianglebadge.exclamationmark")
+                        .resizable()
+                        .padding()
+                      *///  .aspectRatio(contentMode: .fit))
+                    
+
+                    Image(systemName: "lock.trianglebadge.exclamationmark")
+                        .resizable()
                         .foregroundColor(.red)
-                        .font(.title)
-                        .bold()
-                    Text("You need to enable 'Add Guest' in Settings")
+                        .scaledToFit()
+                        .frame(width: 150, height: 150)
+                        .shadow(color: .gray, radius: 10)
+
+                    
+                    
+                    Text("You need to login to have access")
+                        .font(.title2)
+                        .padding(20)
+                        .shadow(color: .gray, radius: 5)
                 }
-              */ // .padding(10)
-                Image(systemName: "lock.trianglebadge.exclamationmark")
-                    .resizable()
-                    .foregroundColor(.red)
-                    .scaledToFit()
-                    .frame(width: 150, height: 150)
-                    .shadow(radius: 100)
+               // .background(Gradient(colors: [.gray, .white]))
                 
                 
-                Text("You need to login to have access")
-                    .font(.title2)
-                    .padding(20)
             }
-            
-            
-            
         }
+        .ignoresSafeArea(.all, edges: .all)
+        //.background(LinearGradient(colors: [.white, .gray], startPoint: .top, endPoint: .bottom))
+    }
+
     }
     
-    
-    
+
     
     struct AddView_Previews: PreviewProvider {
         
@@ -131,4 +156,4 @@ struct AddView: View {
         }
     }
     
-}
+

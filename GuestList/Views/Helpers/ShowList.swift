@@ -13,28 +13,42 @@ struct ShowList: View {
     @EnvironmentObject var enterName: EnterName
     
     var body: some View {
-        List {
-            ForEach (listOfPeople.people, id: \.self) { person in
-                Text(person.name)
-                  
-            }
+        ZStack {
             
-            .onDelete { indexSet in
-                listOfPeople.people.remove(atOffsets: indexSet)
+            List {
+                ForEach (listOfPeople.people, id: \.self) { person in
+                    HStack {
+                        Text(person.name)
+                            .font(.title3)
+                        Spacer()
+                        Text(person.formattedCheckInDate)
+                    }
+                      
+                }
+                
+                .onDelete { indexSet in
+                    listOfPeople.people.remove(atOffsets: indexSet)
+                }
+                .listRowBackground(Rectangle().fill(Gradient(colors: [.white, .gray])))
+              //  .shadow(color: .white, radius: 8)
+                .padding(7)
+                
+                
+
             }
-            .listRowBackground(Rectangle().fill(Gradient(colors: [.white, .gray])))
-            .shadow(radius: 8)
-            //.padding(6)
-            .listRowSeparatorTint(.green)
-            .padding(9)
-        }
-       // .background(Color.mint.edgesIgnoringSafeArea(.all))
-        .background(Gradient(colors: [.gray, .white]))
-       
-        .scrollContentBackground(.hidden)
-        .cornerRadius(20)
-    }
+            .padding(.vertical)
+            .scrollContentBackground(.hidden)
+            .background(Gradient(colors: [.gray, .white]))
+            .shadow(color: .black, radius: 10)
+           // .cornerRadius(20)
     
+            
+        }
+       
+       // .ignoresSafeArea()
+
+    }
+
     struct ShowList_Previews: PreviewProvider {
         static var previews: some View {
             ShowList()

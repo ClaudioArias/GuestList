@@ -15,19 +15,20 @@ struct PinCodeView: View {
     
     
     var body: some View {
+        
         VStack {
             
-            
-           // SecureField(text: $pinCode) {
-           //     Text("Enter Pin")
-                //Spacer()
-                //PinDots()
-               // Spacer()
+
+            SecureField(text: $pinCode) {
+                Text("Enter Pin")
+                Spacer()
+                // PinDots()
+                Spacer()
                 Button(action: { if (pinCode == "2502") {
                     loginSettings.toggle()
                     
                 }
-
+                    
                 }) {
                     ZStack {
                         ButtonView()
@@ -39,9 +40,9 @@ struct PinCodeView: View {
                 .sheet(isPresented: $loginSettings) {
                     SearchView()
                 }
-              //  Spacer()
+                //  Spacer()
             }
-            
+            .padding(80)
             
             //SecureField("Enter Pin", text: $pinCode)
             // TextField(PinDots(), text: $pinCode)
@@ -61,4 +62,5 @@ struct PinCodeView: View {
     
     
     
-//}
+    //}
+}

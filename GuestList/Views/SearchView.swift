@@ -20,149 +20,117 @@ struct SearchView: View {
     @EnvironmentObject var enterName: EnterName
     //@Environment(\.dismiss) private var dismiss
     @EnvironmentObject var changeViews: ChangeViews
+    
 
     var body: some View {
         
-
-           
+        
             NavigationStack {
                 
-              
                 List {
-                    
                     ForEach(listOfPeople.peopleCheckingIn(on: changeViews.dateSelection), id: \.self) { person in
                         NavigationLink {
                             
                     NavigationLink(destination: {
                         
                         ZStack {
-                        //  Color.gray
-                          //.edgesIgnoringSafeArea(.all)
-                           // PopView()
-                             //   .foregroundColor(.black)
-                               //.shadow(radius: 2)
-                            
-                           
+                            LinearGradient(gradient: Gradient(colors: [.white, .green, .white]), startPoint: .top, endPoint: .bottom)
+                                .ignoresSafeArea()
+
                             VStack {
                                 
                                 Text("You have checked \(person.name) in")
                                     .foregroundColor(.black)
                                     .font(.title2)
-                                 //   .shadow(radius: 1)
-                                
-                            
-                                
-                                HStack {
-                                    
+                                    .shadow(radius: 10)
+
+
                                     Image(systemName: "checkmark")
-                                        
-                                        .resizable()
-                                        .foregroundColor(.green)
+                                         .resizable()
+                                         .foregroundColor(.white)
                                          .scaledToFit()
                                          .frame(width: 100, height: 100)
-                                         .shadow(radius: 50)
-                                        
-                                 
-                                    
-                                }
+                                         .shadow(color: .green, radius: 10)
+                                  
+                                
+                                NavigationLink(destination: {
+                                    VStack {
+                                        SearchView()
+                                    }
+
+                                }, label: {
+                                    //VStack {
+
+                                          Text("Back to GuestList")
+                                            .foregroundColor(.blue)
+                                            .font(.title2)
+                                            .padding(.top)
+                                  
+
+                                })
+
                             }
                             
                         }
                         .navigationBarBackButtonHidden(true)
-                        // Temp work around, need to be change to something else
                             .onAppear() {
                                 listOfPeople.checkIn(person: person)
-                            
                             }
-                        
-                       NavigationLink(destination: {
-                           VStack {
-                               SearchView()
-                               
-                                   
-                           }
-                         
 
-                           
-                       }, label: {
-                        //Text("Home Screen")
-                          Text("Home")
-
-                       })
-                       
-                       
-                        
                     }, label: {
                         
                         ZStack {
-                            
-                           // Color.red
-                            //.ignoresSafeArea(.all)
-                            
-                           // PopView()
-                             //   .shadow(radius: 10)
-                            
-                           
+                            LinearGradient(gradient: Gradient(colors: [.white, .red, .white]), startPoint: .top, endPoint: .bottom)
+                            .ignoresSafeArea(.all)
+            
+
                             VStack {
-                                Spacer()
+                             
                                 Text("Tab to check \(person.name) in")
                                     .font(.title2)
                                     .foregroundColor(.black)
-                                  //  .shadow(radius: 4)
+                                    .shadow(radius: 10)
                                 
-                                Spacer()
-                                Image(systemName: "text.insert")
-                                    .resizable()
+                           
+                                Image(systemName: "checkmark")
+                                     .resizable()
+                                     .foregroundColor(.white)
                                      .scaledToFit()
                                      .frame(width: 100, height: 100)
-                                     .shadow(radius: 20)
-                                    .foregroundColor(.red)
+                                     .shadow(radius: 10)
                                     
-                                    
-                              Spacer()
-                                //HStack {
-                                  //  Image("ok_red_mid")
-                                //}
                                 
                             }
                             
                         }
                         
-                        
                     })
-                           
-                       
-                           
-                            
+                               
                             
                         } label: {
                             
                             Text(person.name)
-                                .padding(5)
-                                .cornerRadius(5)
-                        
-                    
-                     
+                                .font(.title3)
+
                         }
-                       
+
                     }
-                    .listRowBackground(Capsule().fill(Gradient(colors: [.white, .gray])))
-                    .cornerRadius(8)
-                    .padding(5)
+                    .listRowBackground(Rectangle().fill(Gradient(colors: [.white, .gray])))
+                    .padding(8)
                     
                 }
-             //   .background(Gradient(colors: [.gray, .white]))
-               // .edgesIgnoringSafeArea(.top)
+                .navigationTitle("Guests")
                 .scrollContentBackground(.hidden)
-                .navigationTitle("Guest List")
+                .background(Gradient(colors: [.white, .gray]))
                 .navigationBarBackButtonHidden(true)
+                .shadow(color: .red, radius: 5)
                
             }
-          
+            
            // .searchable(text: $enterName.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search by name")
-            
-            
+
         }
+    
      /*   var searchResults: [String] {
             if enterName.searchText.isEmpty {
                 return listOfPeople.people
@@ -172,9 +140,7 @@ struct SearchView: View {
             
         */ //}
         }
-        
 
-    
 
     struct SearchVi_Previews: PreviewProvider {
         static var previews: some View {

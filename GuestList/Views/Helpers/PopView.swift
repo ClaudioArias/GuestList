@@ -22,7 +22,7 @@ struct PopView: View {
                  
              
             }
-           
+        
             
         }
         

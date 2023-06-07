@@ -8,28 +8,36 @@
 import Foundation
 import SwiftUI
 
-
-struct Person: Hashable {
-    
+struct Person: Identifiable, Hashable {
     var id = UUID()
     var name: String
-    var checkInDate: String
+    var checkInDate: Date
     
+    var formattedCheckInDate: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMMM yyyy"
+        return formatter.string(from: checkInDate)
+    }
 }
 
 
 class ListOfPeople: ObservableObject {
+    var dateList: [String] {
+        Set(people.map { $0.formattedCheckInDate }).sorted(by: <)
+    }
     
-    
+    var uniqueDates: [String] {
+        return Array(Set(personChecked.map { $0.formattedCheckInDate }))
+    }
+
     
     @Published var people: [Person] = [
-        Person(name: "Michael Jordan", checkInDate: "6 April 2023"),
-        Person(name: "Scottie Pippen", checkInDate: "7 April 2023"),
-        Person(name: "Dennis Rodman", checkInDate: "28 April 2023"),
-        Person(name: "Steve Kerr", checkInDate: "28 April 2023"),
-        Person(name: "Steph Curry", checkInDate: "6 April 2023"),
-        Person(name: "Draymond Green", checkInDate: "7 April 2023")
-        
+        Person(name: "Michael Jordan", checkInDate: Date()),
+        Person(name: "Scottie Pippen", checkInDate: Date()),
+        Person(name: "Dennis Rodman", checkInDate: Date()),
+        Person(name: "Steve Kerr", checkInDate: Date()),
+        Person(name: "Steph Curry", checkInDate: Date()),
+        Person(name: "Draymond Green", checkInDate: Date())
     ]
     
     @Published var personChecked: [Person] = []
@@ -42,17 +50,7 @@ class ListOfPeople: ObservableObject {
     }
     
     func peopleCheckingIn(on date: String) -> [Person] {
-        return people.filter { $0.checkInDate == date }
+        return people.filter { $0.formattedCheckInDate == date }
     }
-    
-    func sameCheckInDate(person: Person) {
-        if (person.checkInDate == person.checkInDate) {
-            //
-        
-        }
-    }
-    
 }
-
-
 

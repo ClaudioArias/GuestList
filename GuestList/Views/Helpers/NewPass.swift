@@ -7,93 +7,95 @@
 
 
 import SwiftUI
-// import Introspect
 
-class changePassWord: ObservableObject {
-    
+class ChangePassword: ObservableObject {
     @Published var pin: String = ""
+    @Published var pin2 = "1234" // This is used to check if the pin is changed and compare
     
+    var isPinCorrect: Bool {
+        return pin == pin2
+    }
 }
 
-public struct NewPass: View {
+struct NewPass: View {
+    @EnvironmentObject var changePassword: ChangePassword
     
-   // @EnvironmentObject var changePassword: ChangePa
     var maxDigits: Int = 4
     var label = "Enter Pin"
     
-    @State var pin: String = ""
-    @State var showPin = false
-    @State var isDisabled = false
-    @State var loginSettings = false
+    @State private var showPin = false
+    @State private var isDisabled = false
+    @State private var loginSettings = false
+    @State var showAlert = false
     
+    var handler: (String, (Bool) -> Void) -> Void
     
-    
-    var handler:(String, (Bool) -> Void) -> Void
-    
-    public var body: some View {
-        
+    var body: some View {
         NavigationView {
-            VStack(spacing: 50) {
-                Text(label).font(.title)
-                ZStack {
-                    pinDots
-                    backgroundField
-
-                }
-                showPinStack
-                
-                // Button to go to next view after correct pin
-                Button {
-                    if (pin == "1234"){
-                        loginSettings.toggle()
-                    }
-                    
-                    
-                } label: {
-                    
-                    NavigationLink(destination: SettingsConfig(), isActive: $loginSettings, label: {Text("")})
-                    
-                   
+            ZStack {
+                LinearGradient(colors: [.blue, .green], startPoint: .top, endPoint: .bottom).ignoresSafeArea()
+                VStack(spacing: 50) {
+                    Text(label)
+                        .font(.title)
                     
                     ZStack {
-                        
-                        if (isDisabled == true) {
-                            
-                            ButtonView()
-                                .foregroundColor(.blue)
-                         Text("Login")
-                                .foregroundColor(.white)
-                                .font(.title3)
-                        
+                        pinDots
+                        backgroundField
+                    }
+                    
+                    showPinStack
+                    
+                    Button(action: {
+                        if changePassword.isPinCorrect {
+                            loginSettings.toggle()
                         }
                         else {
-
-                           // ButtonView()
-                             //   .foregroundColor(.gray)
-                            //Text("Login")
-                              //  .foregroundColor(.white)
-                                //.font(.title3)
+                            showAlert = true
+                        }
+                    }) {
+                        ZStack {
+                            if changePassword.pin.isEmpty {
+                                ButtonView()
+                                    .foregroundColor(.gray)
+                                    .blur(radius: 2)
+                                
+                                Text("Login")
+                                    .foregroundColor(.white)
+                                    .font(.title3)
+                                    .blur(radius: 2)
+                            } else {
+                                ButtonView()
+                                    .foregroundColor(.blue)
+                                    .shadow(color: .black, radius: 1)
+                                
+                                Text("Login")
+                                    .foregroundColor(.white)
+                                    .font(.title3)
+                            }
                         }
                         
-                        
+                    }
+                    //.disabled(!changePassword.isPinCorrect)
+                    .alert("Invalid Pin, try again", isPresented: $showAlert, actions: {Button("Ok", role: .cancel, action: {changePassword.pin.removeAll()})})
+                   
+                    
+                    NavigationLink(destination: SettingsConfig(), isActive: $loginSettings) {
+                        EmptyView()
                     }
                 }
-                //.sheet(isPresented: $loginSettings) {
-                //  SettingsConfig()
-                // TODO need to resolve sheet into other view
-                // }
-                
-                
             }
+            
+            
         }
         .navigationBarBackButtonHidden(true)
+        
     }
     
     private var pinDots: some View {
         HStack {
             Spacer()
-            ForEach(0..<maxDigits) { index in
-                Image(systemName: self.getImageName(at: index))
+            ForEach(0..<maxDigits, id: \.self) { index in
+                Image(systemName: getImageName(at: index))
                     .font(.title)
                 Spacer()
             }
@@ -101,34 +103,18 @@ public struct NewPass: View {
     }
     
     private var backgroundField: some View {
-        let boundPin = Binding<String>(get: { self.pin }, set: { newValue in
-            self.pin = newValue
-            self.submitPin()
-        })
-        
-        return TextField("", text: boundPin, onCommit: submitPin)
-      
-      // Introspect library can used to make the textField become first resonder on appearing
-      // if you decide to add the pod 'Introspect' and import it, comment #50 to #53 and uncomment #55 to #61
-      
-           .accentColor(.clear)
-           .foregroundColor(.clear)
-           .keyboardType(.numberPad)
-          // .disabled(isDisabled)
-      
-//             .introspectTextField { textField in
-//                 textField.tintColor = .clear
-//                 textField.textColor = .clear
-//                 textField.keyboardType = .numberPad
-//                 textField.becomeFirstResponder()
-//                 textField.isEnabled = !self.isDisabled
-//         }
+        SecureField("", text: $changePassword.pin)
+            .accentColor(.clear)
+            .foregroundColor(.clear)
+            .keyboardType(.numberPad)
+            .disabled(false)
     }
+
     
     private var showPinStack: some View {
         HStack {
             Spacer()
-            if !pin.isEmpty {
+            if !changePassword.pin.isEmpty {
                 showPinButton
             }
         }
@@ -138,90 +124,35 @@ public struct NewPass: View {
     
     private var showPinButton: some View {
         Button(action: {
-            self.showPin.toggle()
-        }, label: {
-            self.showPin ?
-                Image(systemName: "eye.slash.fill").foregroundColor(.red) :
-                Image(systemName: "eye.fill").foregroundColor(.green)
-    
-        })
-
-        
-       
-    }
-    
-    
-    private func submitPin() {
-        guard !pin.isEmpty else {
-            showPin = false
-            return
-        }
-       
-        if pin.count == maxDigits {
-            isDisabled = true
-            
-            handler(pin) { isSuccess in
-                if isSuccess {
-                    print("pin matched, go to next page, no action to perfrom here")
-                } else {
-                    pin = ""
-                    isDisabled = false
-                    print("this has to called after showing toast why is the failure")
-                }
-            }
-        }
-        
-        // this code is never reached under  normal circumstances. If the user pastes a text with count higher than the
-        // max digits, we remove the additional characters and make a recursive call.
-        if pin.count > maxDigits {
-            pin = String(pin.prefix(maxDigits))
-            submitPin()
+            showPin.toggle()
+        }) {
+            Image(systemName: showPin ? "eye.slash.fill" : "eye.fill")
+                .foregroundColor(showPin ? .red : .green)
         }
     }
     
     private func getImageName(at index: Int) -> String {
-        if index >= self.pin.count {
-            return "circle"
+        if index >= changePassword.pin.count {
+            return "square"
         }
         
-        if self.showPin {
-            return self.pin.digits[index].numberString + ".circle"
+        if showPin {
+            return "\(changePassword.pin.digits[index]).square"
         }
         
         return "circle.fill"
     }
-    
 }
 
 extension String {
-    
     var digits: [Int] {
-        var result = [Int]()
-        
-        for char in self {
-            if let number = Int(String(char)) {
-                result.append(number)
-            }
-        }
-        
-        return result
+        return compactMap { Int(String($0)) }
     }
-    
 }
 
-extension Int {
-    
-    var numberString: String {
-        
-        guard self < 10 else { return "0" }
-        
-        return String(self)
-    }
-}
 struct NewPass_Previews: PreviewProvider {
     static var previews: some View {
-        NewPass(handler: { _,_  in })
-                 }
-                 
-                 }
-
+        NewPass(handler: { _, _ in })
+            .environmentObject(ChangePassword())
+    }
+}

@@ -13,23 +13,25 @@ struct ListView: View {
     @EnvironmentObject var listOfPeople: ListOfPeople
     @EnvironmentObject var enterName: EnterName
     @State var isEmpty = false
-    
+    init() {
+        UITableView.appearance().backgroundColor = .clear
+    }
     var body: some View {
-        
-        NavigationView {
+      
+        NavigationStack {
             
             List {
-               
+
                 if (changeViews.showAdd == true) {
                     
                     ForEach (listOfPeople.personChecked, id: \.self) { person in
                         HStack {
 
-                            Image("ok_gre")
                             Text(person.name)
+                                .font(.title3)
                         }
-
-                        
+                         .listRowBackground(Rectangle().fill(Gradient(colors: [.white, .gray])))
+                         .padding(8)
                     }
                     .onDelete { indexSet in
                         listOfPeople.personChecked.remove(atOffsets: indexSet)
@@ -40,41 +42,37 @@ struct ListView: View {
                 else if (listOfPeople.personChecked.isEmpty) {
                  
                     
-                    ZStack {
-                        PopView()
-                            .foregroundColor(.white)
-                            .shadow(radius: 2)
-                        Text("No guest has been checked in yet")
-                            .font(.title2)
-                    }
-                    
-               
+                 // Here come some Image for empty                    
+
                 }
                 
                 else {
                     ForEach (listOfPeople.personChecked, id: \.self) { person in
                         HStack {
               
-    
-                                Image("ok_gre")
                             Text(person.name)
-                                
-                          
-                        }
-                        
+                                .font(.title3)
+
+                        }.listRowBackground(Rectangle().fill(Gradient(colors: [.white, .gray])))
+                            .padding(8)
                     }
                     
                 }
             }
+            .navigationTitle("List of: \(changeViews.dateSelection)")
+            .scrollContentBackground(.hidden)
+           // .background(.linearGradient(colors: [.white, .gray], startPoint: .top, endPoint: .bottom))
+            .background(Gradient(colors: [.white, .gray,]))
+            .shadow(color: .green, radius: 8)
             
-            .navigationBarTitle("List: \(changeViews.dateSelection)")
             
         }
        
         
     }
+        
     
-    
+   
     
     struct ListView_Previews: PreviewProvider {
         static var previews: some View {

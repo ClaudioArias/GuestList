@@ -13,44 +13,59 @@ struct ContentView: View {
 
     
     var body: some View {
-        
-        VStack {
+        ZStack {
+            LinearGradient(colors: [.blue, .gray], startPoint: .topLeading, endPoint: .bottomLeading).ignoresSafeArea()
             
-            Spacer()
-            TabView {
-                //Text("Search")
-                SearchView()
-                    .tabItem {
-                        Image(systemName: "magnifyingglass")
-                            .shadow(radius: 5)
-                    }
-                //.tag(0)
+            VStack {
                 
-                ListView()
-                    .tabItem {
-                        Image(systemName: "list.bullet")
-                        // .navigationTitle("List")
-                    }
-                // .tag(1)
-                
-                AddView()
-                    .tabItem {
-                        Image(systemName: "person.fill.badge.plus")
-                            .foregroundColor(.white)
-                    }
-                //.tag(2)
-                
-                NewPass(handler: { _,_  in })
-                    .tabItem {
-                        Image(systemName: "gearshape.2")
-                    }
-                // .tag(3)
+                Spacer()
+                TabView {
+                    //Text("Search")
+                    SearchView()
+                        .padding(.bottom)
+                        .tabItem {
+                            Image(systemName: "magnifyingglass")
+                                
+                        }
+                   
+                    
+                    ListView()
+                        .tabItem {
+                            Image(systemName: "list.bullet")
+                            // .navigationTitle("List")
+                        }
+
+                    
+                    
+                    AddView()
+                        .tabItem {
+                            Image(systemName: "person.fill.badge.plus")
+                                .foregroundColor(.white)
+                        }
+                    
+                    NewPass(handler: { _,_  in })
+                        .tabItem {
+                            Image(systemName: "gearshape.2")
+                        }
+                    
+                }
+                .background(Color.gray)
+                // Change the background color of the tabview
+               // .onAppear() {
+                  //  UITabBar.appearance().backgroundColor = .lightGray
+                    
+               // }
+               
+                .ignoresSafeArea()
+                .environmentObject(ChangeViews())
+                .environmentObject(ListOfPeople())
+                .environmentObject(EnterName())
+                .environmentObject(ChangePassword())
             }
-            .background(Color.gray)
-            .environmentObject(ChangeViews())
-            .environmentObject(ListOfPeople())
-            .environmentObject(EnterName())
+            .background(Color.blue)
+            .tint(.black)
         }
+        
        
     }
     
@@ -61,6 +76,7 @@ struct ContentView: View {
                 .environmentObject(ChangeViews())
                 .environmentObject(ListOfPeople())
                 .environmentObject(EnterName())
+                .environmentObject(ChangePassword())
         }
     }
 }

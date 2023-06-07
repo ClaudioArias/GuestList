@@ -11,6 +11,7 @@ struct Guest: Hashable {
     
     var id = UUID()
     var name: String
-    var checkInDate: String
+    var checkInDate = Date().formatted(.dateTime
+        .day().month(.wide).year())
 
 }
