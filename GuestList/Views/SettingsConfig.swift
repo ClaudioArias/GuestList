@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 class ChangeViews: ObservableObject {
     @Published var showAdd = false
@@ -16,20 +17,26 @@ struct SettingsConfig: View {
     @EnvironmentObject var changeViews: ChangeViews
     @EnvironmentObject var listOfPeople: ListOfPeople
     @EnvironmentObject var changePassWord: ChangePassword
-    
 
     
     
     var body: some View {
         NavigationStack {
-            VStack {
+            VStack (alignment: .center) {
                 Toggle("Add Guest/Delete Guest", isOn: $changeViews.showAdd)
+                    .foregroundColor(.white)
                     .font(.title2)
                     .padding(20)
-                   // .shadow(color: .white, radius: 5)
+                 /*   .onChange(of: changeViews.showAdd) { newValue in
+                        if !newValue {
+                            changeViews.dateSelection = "" // Reset date selection when disabling toggle
+                        }
+                  *///  }
+
                 
                 HStack(alignment: .center) {
                     Text("Select date:")
+                        .foregroundColor(.white)
                         .font(.title2)
                         
                         
@@ -43,43 +50,50 @@ struct SettingsConfig: View {
                     .pickerStyle(MenuPickerStyle())
                     .font(.title2)
                     .padding()
-                  //  .shadow(color: .white, radius: 5)
+                  //  .onChange(of: changeViews.dateSelection) { newValue in
+                    //    listOfPeople.selectedDate = newValue // Update the selected date in ListOfPeople
+                 //   }
                 }
                 
                 Text("Delete Checked lists")
                     .font(.title)
-                    .foregroundColor(.black)
-                    //.shadow(color: .white, radius: 5)
+                    .foregroundColor(.white)
                     .padding(.top, 20)
                 
                 VStack(alignment: .center) {
                     List {
-                        ForEach(listOfPeople.uniqueDates, id: \.self) { date in
-                            HStack {
-                                Text(date)
-                            }
-                            .font(.title2)
-                            .padding(10)
+                        ForEach(Array(Set(listOfPeople.personChecked.map { $0.formattedCheckInDate })), id: \.self) { date in
+                            Text(date)
                         }
+                        
                         .onDelete { indexSet in
-                            listOfPeople.personChecked.remove(atOffsets: indexSet)
+                            let realm = try! Realm()
+                            try! realm.write {
+                                let personsToDelete = listOfPeople.personChecked
+                                realm.delete(personsToDelete)
+                            }
+                            listOfPeople.refreshListCheckedPerson()
                         }
                         .listRowBackground(Rectangle().fill(Gradient(colors: [.white, .green])))
                     }
+                    
+                    .padding(8)
                     .cornerRadius(10)
                     .padding(10)
                     .shadow(color: .black, radius: 5)
+                    
                 }
+
+
 
                 NavigationLink(destination: ChangePin(), label: {
                     VStack {
                         ZStack {
                             ButtonView()
                                 .foregroundColor(.yellow)
-                               // .grayscale(0.1)
-                                .shadow(color: .black, radius: 1)
+                                .shadow(color: .yellow, radius: 1)
                             Text("Change Pin")
-                                .foregroundColor(.black)
+                                .foregroundColor(.white)
                                 .font(.title3)
                         }
                     }
@@ -90,7 +104,7 @@ struct SettingsConfig: View {
                     ZStack {
                         ButtonView()
                             .foregroundColor(.red)
-                            .shadow(color: .black, radius: 1)
+                            .shadow(color: .red, radius: 1)
                         Text("Log Out")
                             .foregroundColor(.white)
                             .font(.title3)
@@ -99,7 +113,7 @@ struct SettingsConfig: View {
                 .padding(50)
             }
             .scrollContentBackground(.hidden)
-            .background(LinearGradient(colors: [.blue, .green], startPoint: .top, endPoint: .bottom))
+            .background(LinearGradient(colors: [.blue, .blue, .green], startPoint: .top, endPoint: .bottom))
         }
         .navigationBarBackButtonHidden(true)
         .toolbarBackground(.hidden)

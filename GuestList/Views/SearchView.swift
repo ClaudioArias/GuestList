@@ -6,114 +6,125 @@
 //
 
 import SwiftUI
+import RealmSwift
 
-class EnterName: ObservableObject {
-    
-    @Published var searchText = ""
-
-    
-}
 
 struct SearchView: View {
     
     @EnvironmentObject var listOfPeople: ListOfPeople
-    @EnvironmentObject var enterName: EnterName
-    //@Environment(\.dismiss) private var dismiss
     @EnvironmentObject var changeViews: ChangeViews
+    @State private var showCheckInConfirmation = false
+    @State private var checkedPerson: Person?
+    @State private var newName: String = ""
+    
+   
     
 
     var body: some View {
         
         
-            NavigationStack {
-                
+        NavigationStack {
+            
+            if (listOfPeople.peopleCheckingIn(on: changeViews.dateSelection).isEmpty) {
+                ZStack {
+                    LinearGradient(colors: [.blue, .blue, .green], startPoint: .top, endPoint: .bottom).ignoresSafeArea()
+                    
+                    Text("No List selected yet")
+                        .font(.title)
+                        .foregroundColor(.white)
+                        
+                }
+            } else {
                 List {
                     ForEach(listOfPeople.peopleCheckingIn(on: changeViews.dateSelection), id: \.self) { person in
                         NavigationLink {
                             
-                    NavigationLink(destination: {
-                        
-                        ZStack {
-                            LinearGradient(gradient: Gradient(colors: [.white, .green, .white]), startPoint: .top, endPoint: .bottom)
-                                .ignoresSafeArea()
-
-                            VStack {
-                                
-                                Text("You have checked \(person.name) in")
-                                    .foregroundColor(.black)
-                                    .font(.title2)
-                                    .shadow(radius: 10)
-
-
-                                    Image(systemName: "checkmark")
+                            ZStack {
+                                LinearGradient(gradient: Gradient(colors: [.blue, .blue, .green]), startPoint: .top, endPoint: .bottom)
+                                    .ignoresSafeArea()
+                                VStack {
+                                  
+                                 NavigationLink(destination: {
+                                     // VIEW when person is checked.
+                                     
+                                     Text("You have checked \(person.name) in.")
+                                         .padding(40)
+                                         .font(.title2)
+                                     Image(systemName: "checkmark.circle")
                                          .resizable()
-                                         .foregroundColor(.white)
-                                         .scaledToFit()
-                                         .frame(width: 100, height: 100)
-                                         .shadow(color: .green, radius: 10)
-                                  
-                                
-                                NavigationLink(destination: {
-                                    VStack {
-                                        SearchView()
-                                    }
-
-                                }, label: {
-                                    //VStack {
-
-                                          Text("Back to GuestList")
-                                            .foregroundColor(.blue)
-                                            .font(.title2)
-                                            .padding(.top)
-                                  
-
-                                })
-
-                            }
-                            
-                        }
-                        .navigationBarBackButtonHidden(true)
-                            .onAppear() {
-                                listOfPeople.checkIn(person: person)
-                            }
-
-                    }, label: {
-                        
-                        ZStack {
-                            LinearGradient(gradient: Gradient(colors: [.white, .red, .white]), startPoint: .top, endPoint: .bottom)
-                            .ignoresSafeArea(.all)
-            
-
-                            VStack {
-                             
-                                Text("Tab to check \(person.name) in")
-                                    .font(.title2)
-                                    .foregroundColor(.black)
-                                    .shadow(radius: 10)
-                                
-                           
-                                Image(systemName: "checkmark")
-                                     .resizable()
-                                     .foregroundColor(.white)
-                                     .scaledToFit()
-                                     .frame(width: 100, height: 100)
-                                     .shadow(radius: 10)
+                                         .frame(width: 200, height: 200)
+                                         .foregroundColor(.green)
+                                         .padding(40)
+                                     
+                                     VStack {
+                                         NavigationLink(destination: SearchView(), label: {
+                                             ZStack {
+                                                 ButtonView()
+                                                     .foregroundColor(.blue)
+                                                 Text("Back to list")
+                                                     .foregroundColor(.white)
+                                                     .onTapGesture() {
+                                                         
+                                                         listOfPeople.performDeleteAfter(person: person, changeViews: changeViews)
+                                                     }
+                                             }
+                                             
+                                         })
+                                     }.padding(40)
+                                     
+                                 }, label: {
+                                     // VIEW before checking In.
+                                     
+                                     VStack {
+                                         Text("Tab to check \(person.name) in.")
+                                             .padding(40)
+                                             .font(.title2)
+                                         Image(systemName: "checkmark.circle")
+                                             .resizable()
+                                             .frame(width: 200, height: 200)
+                                             .foregroundColor(.red)
+                                             .padding(40)
+                                     }
+                                        
+                                 })
                                     
-                                
+                                    // CANCEL button
+                                    NavigationLink(destination: SearchView(), label: {
+                                        VStack {
+                                            ZStack {
+                                                ButtonView()
+                                                    .foregroundColor(.red)
+                                                    .shadow(color: .red, radius: 1)
+                                                Text("Cancel")
+                                                    .foregroundColor(.white)
+                                            }
+                                           
+                                        }
+                                    })
+                                 
+                                    .padding(40)
+                                }
+                                .alert(isPresented: $showCheckInConfirmation) {
+                                    Alert(
+                                        title: Text("Check In"),
+                                        message: Text("Are you sure you want to check in \(person.name)?"),
+                                        primaryButton: .default(Text("Confirm")) {
+                                            listOfPeople.addPersonToCheckedList(person: person, changeViews: changeViews)
+                                        },
+                                        secondaryButton: .cancel()
+                                    )
+                                }
                             }
+                          
                             
-                        }
-                        
-                    })
-                               
                             
                         } label: {
                             
                             Text(person.name)
                                 .font(.title3)
-
+                            
                         }
-
+                        
                     }
                     .listRowBackground(Rectangle().fill(Gradient(colors: [.white, .gray])))
                     .padding(8)
@@ -121,32 +132,28 @@ struct SearchView: View {
                 }
                 .navigationTitle("Guests")
                 .scrollContentBackground(.hidden)
-                .background(Gradient(colors: [.white, .gray]))
+                .background(Gradient(colors: [.blue, .blue, .green]))
                 .navigationBarBackButtonHidden(true)
-                .shadow(color: .red, radius: 5)
+                .shadow(color: .red, radius: 15)
                
+               
+                }
+                
             }
+        
             
-           // .searchable(text: $enterName.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search by name")
-
         }
+        
+       
     
-     /*   var searchResults: [String] {
-            if enterName.searchText.isEmpty {
-                return listOfPeople.people
-            } else {
-                return listOfPeople.people.filter { $0.contains(enterName.searchText) }
-            }
-            
-        */ //}
-        }
+    }
+        
 
 
-    struct SearchVi_Previews: PreviewProvider {
+    struct SearchView_Previews: PreviewProvider {
         static var previews: some View {
             SearchView()
                 .environmentObject(ListOfPeople())
-                .environmentObject(EnterName())
                 .environmentObject(ChangeViews())
             
         }

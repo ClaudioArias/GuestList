@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		6B26050029F2BFE6006EF655 /* ChangePin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2604FF29F2BFE6006EF655 /* ChangePin.swift */; };
 		6B277F6D29DD9769002FBF8F /* ShowList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B277F6C29DD9769002FBF8F /* ShowList.swift */; };
+		6B3F99052A3A007F00EF54C8 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 6B3F99042A3A007F00EF54C8 /* Realm */; };
+		6B3F99072A3A007F00EF54C8 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6B3F99062A3A007F00EF54C8 /* RealmSwift */; };
 		6B4D4B8429909A1C00ADF9AB /* GuestListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4D4B8329909A1C00ADF9AB /* GuestListApp.swift */; };
 		6B4D4B8629909A1C00ADF9AB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4D4B8529909A1C00ADF9AB /* ContentView.swift */; };
 		6B4D4B8829909A2300ADF9AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B4D4B8729909A2300ADF9AB /* Assets.xcassets */; };
@@ -17,12 +19,9 @@
 		6B4D4B9F29909A2300ADF9AB /* GuestListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4D4B9E29909A2300ADF9AB /* GuestListUITests.swift */; };
 		6B4D4BA129909A2300ADF9AB /* GuestListUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B4D4BA029909A2300ADF9AB /* GuestListUITestsLaunchTests.swift */; };
 		6B80B67A29A186F70093DF76 /* SettingsConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B80B67929A186F70093DF76 /* SettingsConfig.swift */; };
-		6B85785629B15F0A008B3A5F /* PopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B85785529B15F0A008B3A5F /* PopView.swift */; };
 		6B8644B6299D77C900E3E7FE /* PinCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8644B5299D77C900E3E7FE /* PinCodeView.swift */; };
 		6B8644BA299DAD9000E3E7FE /* NewPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8644B9299DAD9000E3E7FE /* NewPass.swift */; };
-		6B8644BD299DB1F500E3E7FE /* PasscodeField in Frameworks */ = {isa = PBXBuildFile; productRef = 6B8644BC299DB1F500E3E7FE /* PasscodeField */; };
 		6B8644C3299DEF4300E3E7FE /* PinDots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8644C2299DEF4300E3E7FE /* PinDots.swift */; };
-		6B8644C5299EAA7A00E3E7FE /* TestPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8644C4299EAA7A00E3E7FE /* TestPin.swift */; };
 		6B8644C7299EB40000E3E7FE /* dismissAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8644C6299EB40000E3E7FE /* dismissAction.swift */; };
 		6B99B4462995D502001B9D70 /* ListOfPeople.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B99B4452995D502001B9D70 /* ListOfPeople.swift */; };
 		6B99B4482995EDFC001B9D70 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B99B4472995EDFC001B9D70 /* ListView.swift */; };
@@ -32,6 +31,7 @@
 		6BBBFFD72A12B4360057EE68 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBBFFD62A12B4360057EE68 /* Date.swift */; };
 		6BBF58E12992131800B4EB53 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBF58E02992131800B4EB53 /* SearchView.swift */; };
 		6BD15F502990A53300ED1C8C /* Guest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD15F4F2990A53300ED1C8C /* Guest.swift */; };
+		6BF4A5122A3BE7F300AAE23A /* TestOutCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF4A5112A3BE7F300AAE23A /* TestOutCode.swift */; };
 		6BFDC334299C298A00152E25 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFDC333299C298A00152E25 /* SettingView.swift */; };
 /* End PBXBuildFile section */
 
@@ -66,11 +66,9 @@
 		6B4D4B9E29909A2300ADF9AB /* GuestListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestListUITests.swift; sourceTree = "<group>"; };
 		6B4D4BA029909A2300ADF9AB /* GuestListUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestListUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		6B80B67929A186F70093DF76 /* SettingsConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsConfig.swift; sourceTree = "<group>"; };
-		6B85785529B15F0A008B3A5F /* PopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopView.swift; sourceTree = "<group>"; };
 		6B8644B5299D77C900E3E7FE /* PinCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinCodeView.swift; sourceTree = "<group>"; };
 		6B8644B9299DAD9000E3E7FE /* NewPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPass.swift; sourceTree = "<group>"; };
 		6B8644C2299DEF4300E3E7FE /* PinDots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinDots.swift; sourceTree = "<group>"; };
-		6B8644C4299EAA7A00E3E7FE /* TestPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPin.swift; sourceTree = "<group>"; };
 		6B8644C6299EB40000E3E7FE /* dismissAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dismissAction.swift; sourceTree = "<group>"; };
 		6B99B4452995D502001B9D70 /* ListOfPeople.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfPeople.swift; sourceTree = "<group>"; };
 		6B99B4472995EDFC001B9D70 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
@@ -80,6 +78,7 @@
 		6BBBFFD62A12B4360057EE68 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		6BBF58E02992131800B4EB53 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		6BD15F4F2990A53300ED1C8C /* Guest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Guest.swift; sourceTree = "<group>"; };
+		6BF4A5112A3BE7F300AAE23A /* TestOutCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestOutCode.swift; sourceTree = "<group>"; };
 		6BFDC333299C298A00152E25 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		6BFDC337299C9C9200152E25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -89,7 +88,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B8644BD299DB1F500E3E7FE /* PasscodeField in Frameworks */,
+				6B3F99072A3A007F00EF54C8 /* RealmSwift in Frameworks */,
+				6B3F99052A3A007F00EF54C8 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,13 +204,12 @@
 			isa = PBXGroup;
 			children = (
 				6B99B44B299817CA001B9D70 /* ButtonView.swift */,
+				6BF4A5112A3BE7F300AAE23A /* TestOutCode.swift */,
 				6B8644B5299D77C900E3E7FE /* PinCodeView.swift */,
 				6B8644B9299DAD9000E3E7FE /* NewPass.swift */,
 				6B8644C2299DEF4300E3E7FE /* PinDots.swift */,
-				6B8644C4299EAA7A00E3E7FE /* TestPin.swift */,
 				6B8644C6299EB40000E3E7FE /* dismissAction.swift */,
 				6BA8AA2829A6C37C006B3523 /* MainView.swift */,
-				6B85785529B15F0A008B3A5F /* PopView.swift */,
 				6B277F6C29DD9769002FBF8F /* ShowList.swift */,
 				6B2604FF29F2BFE6006EF655 /* ChangePin.swift */,
 			);
@@ -234,7 +233,8 @@
 			);
 			name = GuestList;
 			packageProductDependencies = (
-				6B8644BC299DB1F500E3E7FE /* PasscodeField */,
+				6B3F99042A3A007F00EF54C8 /* Realm */,
+				6B3F99062A3A007F00EF54C8 /* RealmSwift */,
 			);
 			productName = GuestList;
 			productReference = 6B4D4B8029909A1C00ADF9AB /* GuestList.app */;
@@ -309,7 +309,7 @@
 			);
 			mainGroup = 6B4D4B7729909A1C00ADF9AB;
 			packageReferences = (
-				6B8644BB299DB1F500E3E7FE /* XCRemoteSwiftPackageReference "PasscodeField" */,
+				6B3F99032A3A007F00EF54C8 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 6B4D4B8129909A1C00ADF9AB /* Products */;
 			projectDirPath = "";
@@ -356,6 +356,7 @@
 				6B99B44C299817CA001B9D70 /* ButtonView.swift in Sources */,
 				6BFDC334299C298A00152E25 /* SettingView.swift in Sources */,
 				6B8644B6299D77C900E3E7FE /* PinCodeView.swift in Sources */,
+				6BF4A5122A3BE7F300AAE23A /* TestOutCode.swift in Sources */,
 				6B99B44A2996D5F6001B9D70 /* AddView.swift in Sources */,
 				6B4D4B8629909A1C00ADF9AB /* ContentView.swift in Sources */,
 				6B8644BA299DAD9000E3E7FE /* NewPass.swift in Sources */,
@@ -365,14 +366,12 @@
 				6B99B4482995EDFC001B9D70 /* ListView.swift in Sources */,
 				6B277F6D29DD9769002FBF8F /* ShowList.swift in Sources */,
 				6BBBFFD72A12B4360057EE68 /* Date.swift in Sources */,
-				6B85785629B15F0A008B3A5F /* PopView.swift in Sources */,
 				6B4D4B8429909A1C00ADF9AB /* GuestListApp.swift in Sources */,
 				6BA8AA2929A6C37C006B3523 /* MainView.swift in Sources */,
 				6B26050029F2BFE6006EF655 /* ChangePin.swift in Sources */,
 				6BBF58E12992131800B4EB53 /* SearchView.swift in Sources */,
 				6BD15F502990A53300ED1C8C /* Guest.swift in Sources */,
 				6B8644C3299DEF4300E3E7FE /* PinDots.swift in Sources */,
-				6B8644C5299EAA7A00E3E7FE /* TestPin.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,7 +531,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GuestList/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = R93X959D52;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GuestList/Info.plist;
@@ -569,7 +568,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GuestList/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = R93X959D52;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GuestList/Info.plist;
@@ -715,21 +714,26 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		6B8644BB299DB1F500E3E7FE /* XCRemoteSwiftPackageReference "PasscodeField" */ = {
+		6B3F99032A3A007F00EF54C8 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/hengyu/PasscodeField.git";
+			repositoryURL = "https://github.com/realm/realm-swift";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				branch = master;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		6B8644BC299DB1F500E3E7FE /* PasscodeField */ = {
+		6B3F99042A3A007F00EF54C8 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6B8644BB299DB1F500E3E7FE /* XCRemoteSwiftPackageReference "PasscodeField" */;
-			productName = PasscodeField;
+			package = 6B3F99032A3A007F00EF54C8 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		6B3F99062A3A007F00EF54C8 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6B3F99032A3A007F00EF54C8 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

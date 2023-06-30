@@ -6,141 +6,146 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct AddView: View {
     
     @EnvironmentObject var changeViews: ChangeViews
     @EnvironmentObject var listOfPeople: ListOfPeople
-    @State  var name = ""
-    //@State  var gender = ""
-    @State  var selectedDate = Date()
-   @State var date = Date()
-    @State var showAlert = false
+    @State private var name = ""
+    @State private var date = Date()
+    @State private var showAlert = false
+    let realm = try! Realm()
     
     var body: some View {
-        
-        
-        // This is for the Background and need to be fine tuned.
         ZStack {
-            LinearGradient(colors: [.blue, .green], startPoint: .topLeading, endPoint: .bottomLeading)
-           
-            
-            if (changeViews.showAdd == false) {
-                
-                VStack {
-                    TextField("name", text: $name)
-                        .padding(10)
-                    
-                    DatePicker("Select Check in date", selection: $date,
+            LinearGradient(colors: [.blue, .blue, .green], startPoint: .top, endPoint: .bottom)
+            if (changeViews.showAdd == true) {
+                Spacer()
+                VStack (alignment: .center) {
+                    Spacer()
+                    TextField("Name", text: $name)
+                        .padding(.top, 150)
+
+                    DatePicker("Select Check-in Date", selection: $date,
                                in: Date.now...,
                                displayedComponents: .date)
-                    
-                        .padding(10)
-                
-             
-                    if (name.isEmpty) {
-                        ZStack {
-                            ButtonView()
-                                .foregroundColor(.gray)
-                                .blur(radius: 1)
-                            Text("Add")
-                                .foregroundColor(.white)
-                               .blur(radius: 2)
-
-                        }
-                        .padding(20)
-                            
-                    }
-                   else {
-                        
-                       Button(action: {listOfPeople.people.append(Person(name: name, checkInDate: date))
-                           
-                           showAlert = true
-                       }, label: {
+                    .padding(.top, 10)
+        
+                    if name.isEmpty {
+                        VStack {
                             ZStack {
                                 ButtonView()
-                                    .foregroundColor(.blue)
-                                    .shadow(color: .black, radius: 1)
+                                    .foregroundColor(.gray)
+                                    .blur(radius: 1)
+                                
                                 Text("Add")
                                     .foregroundColor(.white)
-                                   // .shadow(color: .blue, radius: 1)
-
+                                    .blur(radius: 2)
+                            }
+                            .padding(35)
+                            ZStack {
+                                ButtonView()
+                                    .foregroundColor(.gray)
+                                    .blur(radius: 1)
+                                
+                                Text("Cancel")
+                                    .foregroundColor(.white)
+                                    .blur(radius: 2)
+                            }
+                        }
+                        
+                    } else {
+                        Button(action: {
+                            let newPerson = Person()
+                            newPerson.name = name
+                            newPerson.checkInDate = date
+                            
+                            try! realm.write {
+                                realm.add(newPerson)
+                            }
+                            
+                            listOfPeople.refreshList()
+                            showAlert = true
+                          
+                        }, label: {
+                            ZStack {
+                                ButtonView()
+                                    .foregroundColor(.green)
+                                    .shadow(color: .black, radius: 1)
+                                
+                                Text("Add")
+                                    .foregroundColor(.white)
+                                
                             }
                             .padding(20)
+ 
                         })
-                       .alert("\(name) added successfully", isPresented: $showAlert, actions: {
-                           Button("Ok", role: .cancel, action: {
-                               name.removeAll()
-                           })
-                       })
-                    }
-                  // *** Need to change button if Showlist is empty buttton blur
-                  //  NavigationView {
-                        
-                     //   ScrollView {
-                      //      Spacer()
-                      //      NavigationLink(destination: ShowList()) {
-                           //     ZStack {
-
-                                //    ButtonView()
-                                   //     .foregroundColor(.green)
-                               //     Text("Show List")
-                                       // .foregroundColor(.white)
-                                  //      .font(.title3)
-                           //     }
-                           //     .padding(20)
-                                
-                    //        }
-                        
-                    //    }
-                        
-                        
-              //      }
-                    
-                   // .padding()
-                    
-
-                    
-                }
-                .font(.title2)
-                .padding(10)
-                
-            }
-            else {
-                VStack {
-                    // This is a customize image with gradient color.
-                   /* LinearGradient(gradient: Gradient(colors: [.white, .red, .red]), startPoint: .top, endPoint: .bottom)
-                        .mask( Image(systemName: "lock.trianglebadge.exclamationmark")
-                        .resizable()
+                        .alert("\(name) has been added", isPresented: $showAlert, actions: {Button("Ok", role: .cancel, action: {name.removeAll()})})
                         .padding()
-                      *///  .aspectRatio(contentMode: .fit))
-                    
+                        
+                        Button(action: {name.removeAll()
+                            
+                        }, label: {
+                            ZStack {
+                                
+                                ButtonView()
+                                    .foregroundColor(.red)
+                                Text("cancel")
+                                    .foregroundColor(.white)
+                            }
+                        })
+        
+                    }
+                    // Here you show the list of people just added.
+                    NavigationStack {
+                        ZStack {
+                            LinearGradient(colors: [.blue, .green], startPoint: .top, endPoint: .bottom).ignoresSafeArea()
+                            NavigationLink(destination: ShowList(), label: {
+                                ZStack {
+                                    ButtonView()
+                                        .foregroundColor(.blue)
+                                        .shadow(color: .blue, radius: 1)
+                                    Text("Show list")
+                                        .foregroundColor(.white)
+                                        
+                                }
+                            })
+                        
+                        }
+                   
 
+                    }
+                    .padding(.bottom)
+                 Spacer()
+                }
+                .scrollIndicators(.hidden)
+                .scrollContentBackground(.hidden)
+                .font(.title2)
+                .padding(.bottom)
+                
+            } else {
+                VStack {
                     Image(systemName: "lock.trianglebadge.exclamationmark")
                         .resizable()
                         .foregroundColor(.red)
                         .scaledToFit()
                         .frame(width: 150, height: 150)
-                        .shadow(color: .gray, radius: 10)
-
-                    
+                        .shadow(color: .black, radius: 1)
                     
                     Text("You need to login to have access")
+                        .foregroundColor(.white)
                         .font(.title2)
                         .padding(20)
-                        .shadow(color: .gray, radius: 5)
                 }
-               // .background(Gradient(colors: [.gray, .white]))
-                
-                
             }
+            
         }
-        .ignoresSafeArea(.all, edges: .all)
-        //.background(LinearGradient(colors: [.white, .gray], startPoint: .top, endPoint: .bottom))
+        .ignoresSafeArea()
+        
     }
+}
 
-    }
-    
 
     
     struct AddView_Previews: PreviewProvider {

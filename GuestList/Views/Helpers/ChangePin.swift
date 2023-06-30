@@ -26,7 +26,7 @@ struct ChangePin: View {
     var body: some View {
  
         ZStack {
-            LinearGradient(colors: [ .blue, .green], startPoint: .top, endPoint: .bottom).ignoresSafeArea(.all)
+            LinearGradient(colors: [ .blue, .blue, .green], startPoint: .top, endPoint: .bottom).ignoresSafeArea(.all)
                     
                 VStack {
 
@@ -38,12 +38,14 @@ struct ChangePin: View {
                                         SecureField("New Pin", text: $newPin1)
                                             .font(.title)
                                             .padding(20)
+                                            .keyboardType(.numberPad)
                                             
 
                                     } else {
                                         TextField("New Pin", text: $newPin1)
                                             .font(.title)
                                             .padding(20)
+                                            .keyboardType(.numberPad)
                                     }
                                 }.padding(.trailing, 32)
 
@@ -68,11 +70,13 @@ struct ChangePin: View {
                                         SecureField("Confirm Pin", text: $newPin2)
                                             .font(.title)
                                             .padding(20)
+                                            .keyboardType(.numberPad)
                                             
                                     } else {
                                         TextField("Confirm Pin", text: $newPin2)
                                             .font(.title)
-                                        .padding(20)
+                                            .padding(20)
+                                            .keyboardType(.numberPad)
                                     }
                                 }.padding(.trailing, 32)
                         
@@ -128,7 +132,7 @@ struct ChangePin: View {
                              ZStack {
                                  ButtonView()
                                      .foregroundColor(.blue)
-                                     .shadow(color: .black, radius: 1)
+                                     .shadow(color: .blue, radius: 1)
                                  Text("Submit")
                                      .foregroundColor(.white)
                              }

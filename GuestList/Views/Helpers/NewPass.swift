@@ -33,9 +33,10 @@ struct NewPass: View {
     var body: some View {
         NavigationView {
             ZStack {
-                LinearGradient(colors: [.blue, .green], startPoint: .top, endPoint: .bottom).ignoresSafeArea()
+                LinearGradient(colors: [.blue, .blue, .green], startPoint: .top, endPoint: .bottom).ignoresSafeArea()
                 VStack(spacing: 50) {
                     Text(label)
+                        .foregroundColor(.white)
                         .font(.title)
                     
                     ZStack {
@@ -65,8 +66,8 @@ struct NewPass: View {
                                     .blur(radius: 2)
                             } else {
                                 ButtonView()
-                                    .foregroundColor(.blue)
-                                    .shadow(color: .black, radius: 1)
+                                    .foregroundColor(.green)
+                                    .shadow(color: .green, radius: 1)
                                 
                                 Text("Login")
                                     .foregroundColor(.white)
@@ -76,7 +77,7 @@ struct NewPass: View {
                         
                     }
                     //.disabled(!changePassword.isPinCorrect)
-                    .alert("Invalid Pin, try again", isPresented: $showAlert, actions: {Button("Ok", role: .cancel, action: {changePassword.pin.removeAll()})})
+                    .alert("Invalid Pin, try again!", isPresented: $showAlert, actions: {Button("Ok", role: .cancel, action: {changePassword.pin.removeAll()})})
                    
                     
                     NavigationLink(destination: SettingsConfig(), isActive: $loginSettings) {
@@ -84,8 +85,7 @@ struct NewPass: View {
                     }
                 }
             }
-            
-            
+  
         }
         .navigationBarBackButtonHidden(true)
         
@@ -104,7 +104,7 @@ struct NewPass: View {
     
     private var backgroundField: some View {
         SecureField("", text: $changePassword.pin)
-            .accentColor(.clear)
+            .tint(.clear)
             .foregroundColor(.clear)
             .keyboardType(.numberPad)
             .disabled(false)
@@ -133,14 +133,15 @@ struct NewPass: View {
     
     private func getImageName(at index: Int) -> String {
         if index >= changePassword.pin.count {
-            return "square"
+            return "circle"
         }
         
         if showPin {
-            return "\(changePassword.pin.digits[index]).square"
+            return "\(changePassword.pin.digits[index]).circle"
         }
         
         return "circle.fill"
+            
     }
 }
 

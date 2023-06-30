@@ -11,17 +11,12 @@ struct ButtonView: View {
     var body: some View {
         
         
-        Ellipse()
+        Rectangle()
             .frame(width: 150, height: 40)
             .opacity(0.9)
-            .shadow(radius: 5)
-        
-        
-        
-        
-        
-        
-        
+            .shadow(color: .black, radius: 5)
+            .cornerRadius(10)
+
     }
     
     struct ButtonView_Previews: PreviewProvider {

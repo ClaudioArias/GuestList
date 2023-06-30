@@ -8,75 +8,57 @@
 import SwiftUI
 
 struct ContentView: View {
-    
     @EnvironmentObject var changeViews: ChangeViews
-
+    @EnvironmentObject var listOfPeople: ListOfPeople
     
+
+
     var body: some View {
         ZStack {
-            LinearGradient(colors: [.blue, .gray], startPoint: .topLeading, endPoint: .bottomLeading).ignoresSafeArea()
-            
-            VStack {
-                
-                Spacer()
-                TabView {
-                    //Text("Search")
-                    SearchView()
-                        .padding(.bottom)
-                        .tabItem {
-                            Image(systemName: "magnifyingglass")
-                                
-                        }
-                   
-                    
-                    ListView()
-                        .tabItem {
-                            Image(systemName: "list.bullet")
-                            // .navigationTitle("List")
-                        }
-
-                    
-                    
-                    AddView()
-                        .tabItem {
-                            Image(systemName: "person.fill.badge.plus")
-                                .foregroundColor(.white)
-                        }
-                    
-                    NewPass(handler: { _,_  in })
-                        .tabItem {
-                            Image(systemName: "gearshape.2")
-                        }
-                    
-                }
-                .background(Color.gray)
-                // Change the background color of the tabview
-               // .onAppear() {
-                  //  UITabBar.appearance().backgroundColor = .lightGray
-                    
-               // }
-               
+            LinearGradient(colors: [.blue, .gray], startPoint: .topLeading, endPoint: .bottomLeading)
                 .ignoresSafeArea()
-                .environmentObject(ChangeViews())
-                .environmentObject(ListOfPeople())
-                .environmentObject(EnterName())
-                .environmentObject(ChangePassword())
+
+            TabView {
+                SearchView()
+                    .environmentObject(changeViews)
+                    .environmentObject(listOfPeople)
+                    .tabItem {
+                        Image(systemName: "magnifyingglass")
+                    }
+                    .tag(0)
+
+                ListView(listOfPeople: _listOfPeople)
+                    .tabItem {
+                        Image(systemName: "list.bullet")
+                    }
+                    .tag(1)
+
+                AddView()
+                    .tabItem {
+                        Image(systemName: "person.fill.badge.plus")
+                    }
+                    .tag(2)
+
+                NewPass(handler: { _,_  in })
+                    .tabItem {
+                        Image(systemName: "gearshape.2")
+                    }
+                    .tag(3)
             }
-            .background(Color.blue)
-            .tint(.black)
+            .background(Color.green) // Set the background color of the TabView
+            .ignoresSafeArea()
+
         }
-        
-       
-    }
-    
-    
-    struct ContentView_Previews: PreviewProvider {
-        static var previews: some View {
-            ContentView()
-                .environmentObject(ChangeViews())
-                .environmentObject(ListOfPeople())
-                .environmentObject(EnterName())
-                .environmentObject(ChangePassword())
-        }
+        .accentColor(.black)
     }
 }
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+            .environmentObject(ChangeViews())
+            .environmentObject(ListOfPeople())
+            .environmentObject(ChangePassword())
+    }
+}
+
